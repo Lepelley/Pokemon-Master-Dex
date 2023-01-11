@@ -1,0 +1,82 @@
+@startuml
+entity Game {
+    * isOnline : bool
+    * name : varchar
+    * image : varchar
+    --
+    * isOnline : bool
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity Pokedex {
+    * name : varchar
+    * isRegional : bool
+    --
+    * isOnline : bool
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity Pokemon {
+    * name : varchar
+    * nationalNumber : int
+    --
+    * isOnline : bool
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity User {
+    * email : varchar
+    * roles : json
+    * password : varchar
+    * nickname : varchar
+    --
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity Ball {
+    * name : varchar
+    * image : varchar
+    --
+    * isOnline : bool
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity PokedexPokemon {
+    * regionalNumber : int
+    --
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity UserPokedex {
+    * name : varchar
+    * isShiny : bool
+    --
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+entity UserPokedexPokemon {
+    * isCaptured : bool
+    * notes : text
+    --
+    * createdAt : datetime
+    * updatedAt : datetime
+}
+
+Game }o----o{ Ball
+Ball }o----o| UserPokedexPokemon
+Game }o----o| UserPokedexPokemon
+UserPokedex }o----|| UserPokedexPokemon
+PokedexPokemon |o----|| UserPokedexPokemon
+User }o----|| UserPokedex
+Game |o----|{ Pokedex
+Pokedex }o----|| PokedexPokemon
+Pokemon }o----|| PokedexPokemon
+UserPokedex |o----o{ Pokedex
+@enduml
