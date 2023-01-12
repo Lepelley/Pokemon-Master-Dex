@@ -1,0 +1,22 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent() }} &raquo; Administration{% endblock %}
+
+{% block body %}
+    <h1>Administration</h1>
+
+    <ul class="container">
+        <li>
+            <a href="{{ path('app_admin_game_list') }}">Pokédex</a>
+        </li>
+        <li>
+            <a href="{{ path('app_admin_pokemon_list') }}">Pokémon</a>
+        </li>
+        <li>
+            <a href="{{ path('app_admin_game_list') }}">Jeux</a>
+        </li>
+        <li>
+            <a href="{{ path('app_admin_ball_list') }}">Ball</a>
+        </li>
+    </ul>
+{% endblock %}
