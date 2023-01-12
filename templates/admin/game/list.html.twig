@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent()}} &raquo; Jeux {% endblock %}
+
+{% block body %}
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <th>Nom du jeu</th>
+                <th>En ligne</th>
+                <th>Créé le</th>
+                <th>Mis à jour le</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.name }}</td>
+                <td>{{ game.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ game.createdAt | date('d/m/y H:i') }}</td>
+                <td>{{ game.updatedAt | date('d/m/y H:i') }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
