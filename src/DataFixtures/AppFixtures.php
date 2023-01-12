@@ -2,6 +2,10 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Game;
+use App\Entity\Pokedex;
+use App\Entity\PokedexPokemon;
+use App\Entity\Pokemon;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -10,23 +14,98 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AppFixtures extends Fixture
 {
     public function __construct(
-        private readonly UserPasswordHasherInterface $passwordHasher
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
     public function load(ObjectManager $manager): void
     {
         $time = new \DateTimeImmutable();
-        $user = (new User())
+        $trainer = (new User())
             ->setPassword('test')
             ->setRoles(['ROLE_ADMIN', 'ROLE_USER'])
             ->setEmail('lepelley@live.fr')
             ->setNickname('Vincent')
             ->setCreatedAt($time)
+            ->setUpdatedAt($time);
+        $trainer->setPassword($this->passwordHasher->hashPassword($trainer, 'azerty'));
+        $manager->persist($trainer);
+
+        $poke = [];
+        $fileHandle = fopen("var/pokemon.csv", "r");
+        while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
+            $pokemon = (new Pokemon())
+                ->setName($row[1])
+                ->setNationalNumber($row[0])
+                ->setIsOnline(true)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $manager->persist($pokemon);
+            $poke[] = $pokemon;
+        }
+
+        $game = (new Game())
+            ->setName('Violet')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
             ->setUpdatedAt($time)
         ;
-        $user->setPassword($this->passwordHasher->hashPassword($user, 'azerty'));
-        $manager->persist($user);
+        $manager->persist($game);
+
+        $game = (new Game())
+            ->setName('Écarlate')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
+            ->setUpdatedAt($time)
+        ;
+        $manager->persist($game);
+
+        $game = (new Game())
+            ->setName('HOME')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
+            ->setUpdatedAt($time)
+        ;
+        $manager->persist($game);
+
+        $pokedex = (new Pokedex())
+            ->setName('Violet')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
+            ->setUpdatedAt($time)
+            ->setIsRegional(true)
+        ;
+        $manager->persist($pokedex);
+
+        $pokedex = (new Pokedex())
+            ->setName('Écarlate')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
+            ->setUpdatedAt($time)
+            ->setIsRegional(true)
+        ;
+        $manager->persist($pokedex);
+
+        $pokedex = (new Pokedex())
+            ->setName('HOME')
+            ->setIsOnline(true)
+            ->setCreatedAt($time)
+            ->setUpdatedAt($time)
+            ->setIsRegional(false)
+        ;
+        $manager->persist($pokedex);
+
+        foreach ($poke as $p) {
+            $dexMon = (new PokedexPokemon())
+                ->setPokemon($p)
+                ->setPokedex($pokedex)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $manager->persist($dexMon);
+        }
+        $manager->persist($pokedex);
 
         $manager->flush();
     }
