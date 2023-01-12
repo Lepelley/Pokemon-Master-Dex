@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent()}} &raquo; Pokémon {% endblock %}
+
+{% block body %}
+
+    <table class="table text-center">
+        <tr>
+            <th>N°</th>
+            <th>Nom</th>
+            <th>Image</th>
+            <th>Image Shiny</th>
+            <th>En ligne</th>
+            <th>Créé le</th>
+            <th>Mis à jour le</th>
+            <th>Options</th>
+        </tr>
+        <tbody>
+        {% for poke in pokemon %}
+            <tr>
+                <td>{{ poke.nationalNumber }}</td>
+                <td>{{ poke.name }}</td>
+                <td>
+                    <span><i class="pkicon pkicon-{{ poke.spriteNumber}}"></i></span>
+                <td>
+                    <span><i class="pkicon color-shiny pkicon-{{ poke.spriteNumber}}"></i></span>
+                </td>
+                <td>{{ poke.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ poke.createdAt | date('d/m/y H:i') }}</td>
+                <td>{{ poke.updatedAt | date('d/m/y H:i') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

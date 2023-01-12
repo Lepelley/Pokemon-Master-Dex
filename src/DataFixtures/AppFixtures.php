@@ -22,13 +22,12 @@ class AppFixtures extends Fixture
     {
         $time = new \DateTimeImmutable();
         $trainer = (new User())
-            ->setPassword('test')
             ->setRoles(['ROLE_ADMIN', 'ROLE_USER'])
             ->setEmail('lepelley@live.fr')
             ->setNickname('Vincent')
             ->setCreatedAt($time)
             ->setUpdatedAt($time);
-        $trainer->setPassword($this->passwordHasher->hashPassword($trainer, 'azerty'));
+        $trainer->setPassword($this->passwordHasher->hashPassword($trainer, 'test'));
         $manager->persist($trainer);
 
         $poke = [];
