@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} &raquo; Accueil{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+    <h1>Pokédex de {{ app.user.nickname }}</h1>
+    <a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex</a>
+
+    <ul>
+        {% for pokedex in user_pokedex %}
+            <li><a href="{{ path('app_pokedex_view', {id: pokedex.id}) }}">{{ pokedex.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
+    {% endif %}
+{% endblock %}
