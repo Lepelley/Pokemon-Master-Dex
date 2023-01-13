@@ -37,6 +37,10 @@ class UserPokedex
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
     private Collection $pokemon;
 
+    private ?int $pokemonCaught = null;
+
+    private ?int $pokemonCaughtPerCent = null;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -107,7 +111,7 @@ class UserPokedex
     {
         if (!$this->pokemon->contains($pokemon)) {
             $this->pokemon->add($pokemon);
-            $pokemon->setUserPokedex($this);
+            $pokemon->setPokedex($this);
         }
 
         return $this;
@@ -117,10 +121,39 @@ class UserPokedex
     {
         if ($this->pokemon->removeElement($pokemon)) {
             // set the owning side to null (unless already changed)
-            if ($pokemon->getUserPokedex() === $this) {
-                $pokemon->setUserPokedex(null);
+            if ($pokemon->getPokedex() === $this) {
+                $pokemon->setPokedex(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPokemonCaught(): ?int
+    {
+        return $this->pokemonCaught;
+    }
+
+    public function setPokemonCaught(?int $pokemonCaught): self
+    {
+        $this->pokemonCaught = $pokemonCaught;
+
+        return $this;
+    }
+
+    public function getPokemonCaughtPerCent(): ?int
+    {
+        return $this->pokemonCaughtPerCent;
+    }
+
+    public function setPokemonCaughtPerCent(int $caught): self
+    {
+        if (0 === $this->getPokemon()->count()) {
+            $this->pokemonCaughtPerCent = 0;
+
+            return $this;
+        }
+        $this->pokemonCaughtPerCent = ceil($caught * 100 / $this->getPokemon()->count());
 
         return $this;
     }

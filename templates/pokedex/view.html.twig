@@ -9,7 +9,7 @@
             <li class="breadcrumb-item active" aria-current="page">{{ pokedex.name }}</li>
         </ol>
     </nav>
-    
+
     <h1 class="text-center">
         {{ pokedex.name }}
         {% if pokedex.shiny %}
@@ -18,10 +18,21 @@
         de {{ pokedex.trainer.nickname }}
     </h1>
 
-    <main class="container">
+    <h2 class="text-center">
+        {{ pokedex.pokemonCaught }} / {{ pokedex.pokemon.count }}
+    </h2>
+
+    <div style="width: 50%;margin: 0 auto;">
+        <div class="progress" role="progressbar" aria-label="Dex's Progress"
+             aria-valuenow="{{ pokedex.pokemonCaughtPerCent }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: {{ pokedex.pokemonCaughtPerCent }}%"></div>
+        </div>
+    </div>
+
+    <main class="container mt-5">
         <div class="pokedex-view">
         {% for pokemon in pokedex.pokemon %}
-            <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary" }}">
+            <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary js-captured" }}">
                 <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
                     {{ pokemon.pokemon.pokemon.name }}<br>
                     <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}

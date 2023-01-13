@@ -4,14 +4,23 @@
 
 {% block body %}
     {% if app.user %}
-    <h1>Pokédex de {{ app.user.nickname }}</h1>
-    <a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex</a>
+        <div class="row">
+            <h1 class="col-10">Pokédex de {{ app.user.nickname }} ({{ completion }}% de complétion)</h1>
+            <p class="col-2"><a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex</a></p>
+        </div>
 
-    <ul>
         {% for pokedex in user_pokedex %}
-            <li><a href="{{ path('app_pokedex_view', {id: pokedex.id}) }}">{{ pokedex.name }}</a></li>
+            <p>
+                <span style="width: 20%;display:inline-block">
+                    <span class="progress" role="progressbar" aria-label="Dex's Progress"
+                         aria-valuenow="{{ pokedex.pokemonCaughtPerCent }}" aria-valuemin="0" aria-valuemax="100">
+                        <span class="progress-bar" style="width: {{ pokedex.pokemonCaughtPerCent }}%"></span>
+                    </span>
+                </span>
+                <a href="{{ path('app_pokedex_view', {id: pokedex.id}) }}">{{ pokedex.name }}</a>
+            </p>
         {% endfor %}
-    </ul>
+
     {% else %}
         <a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
     {% endif %}

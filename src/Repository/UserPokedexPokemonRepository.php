@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\UserPokedex;
 use App\Entity\UserPokedexPokemon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,19 @@ class UserPokedexPokemonRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function pokemonCaughtByEntity(UserPokedex $entity): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->andWhere('u.isCaptured = :val')
+            ->andWhere('u.pokedex = :entity')
+            ->setParameter('val', true)
+            ->setParameter('entity', $entity)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
 //    /**
