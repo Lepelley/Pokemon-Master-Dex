@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Game;
 use App\Entity\Pokedex;
 use App\Entity\UserPokedex;
+use App\Repository\PokedexRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -24,6 +24,11 @@ class UserPokedexType extends AbstractType
                 'label' => 'Jeu(x)/Génération',
                 'class' => Pokedex::class,
                 'choice_label' => 'name',
+                'query_builder' => function (PokedexRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.isOnline = :val')
+                        ->setParameter('val', true);
+                },
             ])
             ->add('isShiny', CheckboxType::class, [
                 'label' => 'Version chromatique',
