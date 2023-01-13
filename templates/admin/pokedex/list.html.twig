@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent()}} &raquo; Pokédex {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="col-10">Pokédex</h1>
+        <p class="col-2"><a href="" class="btn btn-primary">Créer un Pokédex</a></p>
+    </div>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+        <tr>
+            <th>Nom du Pokédex</th>
+            <th>Nombre de Pokémon</th>
+            <th>Nombre de jeux</th>
+            <th>En ligne</th>
+            <th>Créé le</th>
+            <th>Mis à jour le</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dex in pokedex %}
+            <tr>
+                <td>{{ dex.name }}</td>
+                <td>{{ dex.pokemon.count }}</td>
+                <td>{{ dex.games.count }}</td>
+                <td>{{ dex.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ dex.createdAt | date('d/m/Y H:i') }}</td>
+                <td>{{ dex.updatedAt | date('d/m/Y H:i') }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
