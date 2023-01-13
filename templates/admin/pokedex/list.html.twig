@@ -3,6 +3,14 @@
 {% block title %} {{ parent()}} &raquo; Pokédex {% endblock %}
 
 {% block body %}
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pokédex</li>
+        </ol>
+    </nav>
+
     <div class="row">
         <h1 class="col-10">Pokédex</h1>
         <p class="col-2"><a href="" class="btn btn-primary">Créer un Pokédex</a></p>
