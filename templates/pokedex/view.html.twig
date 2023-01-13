@@ -3,18 +3,46 @@
 {% block title %}{{ parent() }} &raquo; {{ pokedex.name }} de {{ pokedex.trainer.nickname }}{% endblock %}
 
 {% block body %}
-    <h1>
-        {{ pokedex.name }} de {{ pokedex.trainer.nickname }}
+    <h1 class="text-center">
+        {{ pokedex.name }}
         {% if pokedex.shiny %}
             <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
         {% endif %}
+        de {{ pokedex.trainer.nickname }}
     </h1>
 
-    {% for pokemon in pokedex.pokemon %}
-    <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}">
-        {{ pokemon.pokemon.regionalNumber ? pokemon.pokemon.regionalNumber : pokemon.pokemon.pokemon.nationalNumber }}
-        {{ pokemon.pokemon.pokemon.name }}
-        <span><i class="pkicon {{ pokedex.shiny ? 'color-shiny' }} pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i></span>
-    </a>
-    {% endfor %}
+    <main class="container">
+        <div class="pokedex-view">
+        {% for pokemon in pokedex.pokemon %}
+            <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary" }}">
+                <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
+                    {{ pokemon.pokemon.pokemon.name }}<br>
+                    <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
+                                pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i><br>
+
+                    <span class="pokedex-pokemon__infos">
+                        <span class="col">
+                            {% if pokemon.captureBall %}
+                                <img
+                                        src="{{ asset(pokemon.captureBall.image) }}"
+                                        alt="{{ pokemon.captureBall.name }}"
+                                        title="{{ pokemon.captureBall.name }}">
+                            {% endif %}
+                        </span>
+                        <span class="col">
+                            {{ pokemon.pokemon.regionalNumber
+                            ? "#" ~ pokemon.pokemon.regionalNumber
+                            : "#" ~ pokemon.pokemon.pokemon.nationalNumber }}
+                        </span>
+                        <span class="col">
+                            {% if pokemon.notes %}
+                                <i class="bi bi-journal-text" title="{{ pokemon.notes }}"></i>
+                            {% endif %}
+                        </span>
+                    </span>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </main>
 {% endblock %}

@@ -1,0 +1,19 @@
+.pokedex-view {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pokedex-view .pokedex-view__pokemon{
+    border: 1px solid white;
+    text-align: center;
+    min-width: 10%;
+}
+
+.pokedex-view a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.pokedex-view .pokedex-pokemon__infos {
+    display: flex;
+}
