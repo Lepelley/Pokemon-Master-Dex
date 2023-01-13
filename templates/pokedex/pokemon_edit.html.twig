@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block body %}
+    <p>
+        <a href="{{ path('app_pokedex_view', {id: pokedexId}) }}" class="btn btn-primary">Revenir au Pokédex</a>
+    </p>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Modifier" class="btn btn-success" />
+    {{ form_end(form) }}
+{% endblock %}

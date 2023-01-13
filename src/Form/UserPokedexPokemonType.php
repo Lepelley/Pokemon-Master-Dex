@@ -21,9 +21,10 @@ class UserPokedexPokemonType extends AbstractType
                 'label' => 'Attrapé ?',
                 'required' => false,
             ])
-            ->add('captureGame', TextType::class, [
+            ->add('captureGame', EntityType::class, [
                 'label' => 'Capturé sur',
                 'class' => Game::class,
+                'choice_label' => 'name',
                 'required' => false,
             ])
             ->add('captureBall', EntityType::class, [
