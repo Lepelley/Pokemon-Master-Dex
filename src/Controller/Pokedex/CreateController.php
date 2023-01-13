@@ -3,6 +3,7 @@
 namespace App\Controller\Pokedex;
 
 use App\Entity\UserPokedex;
+use App\Entity\UserPokedexPokemon;
 use App\Form\UserPokedexType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,7 @@ class CreateController extends AbstractController
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
             ;
+            $this->createEntriesForPokedex($pokedex, $time);
             $this->entityManager->persist($pokedex);
             $this->entityManager->flush();
 
@@ -44,5 +46,24 @@ class CreateController extends AbstractController
         return $this->render('pokedex/create.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    private function createEntriesForPokedex(UserPokedex $pokedex, \DateTimeImmutable $time): void
+    {
+        foreach ($pokedex->getPokedex()->getPokemon() as $pokemon) {
+            $entry = (new UserPokedexPokemon())
+                ->setPokedex($pokedex)
+                ->setPokemon($pokemon)
+                ->setIsCaptured(false)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $entry->setPokedex($pokedex);
+            $entry->setPokemon($pokemon);
+            $entry->setIsCaptured(false);
+            $this->entityManager->persist($entry);
+        }
+
+        return;
     }
 }

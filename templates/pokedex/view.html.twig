@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} &raquo; {{ pokedex.name }} de {{ pokedex.trainer.nickname }}{% endblock %}
+
+{% block body %}
+    <h1>
+        {{ pokedex.name }} de {{ pokedex.trainer.nickname }}
+        {% if pokedex.shiny %}
+            <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
+        {% endif %}
+    </h1>
+
+    {% for pokemon in pokedex.pokemon %}
+    <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}">
+        {{ pokemon.pokemon.regionalNumber ? pokemon.pokemon.regionalNumber : pokemon.pokemon.pokemon.nationalNumber }}
+        {{ pokemon.pokemon.pokemon.name }}
+        <span><i class="pkicon {{ pokedex.shiny ? 'color-shiny' }} pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i></span>
+    </a>
+    {% endfor %}
+{% endblock %}

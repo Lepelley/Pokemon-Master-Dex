@@ -26,9 +26,6 @@ class UserPokedex
     #[ORM\Column]
     private ?bool $isShiny = null;
 
-    #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
-    private Collection $userPokedexPokemon;
-
     #[ORM\ManyToOne(inversedBy: 'allUsersPokedex')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Pokedex $pokedex = null;
@@ -37,9 +34,12 @@ class UserPokedex
     #[ORM\JoinColumn(nullable: false)]
     private ?User $trainer = null;
 
+    #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
+    private Collection $pokemon;
+
     public function __construct()
     {
-        $this->userPokedexPokemon = new ArrayCollection();
+        $this->pokemon = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,6 +91,36 @@ class UserPokedex
     public function setPokedex(?Pokedex $pokedex): self
     {
         $this->pokedex = $pokedex;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserPokedexPokemon>
+     */
+    public function getPokemon(): Collection
+    {
+        return $this->pokemon;
+    }
+
+    public function addPokemon(UserPokedexPokemon $pokemon): self
+    {
+        if (!$this->pokemon->contains($pokemon)) {
+            $this->pokemon->add($pokemon);
+            $pokemon->setUserPokedex($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokemon(UserPokedexPokemon $pokemon): self
+    {
+        if ($this->pokemon->removeElement($pokemon)) {
+            // set the owning side to null (unless already changed)
+            if ($pokemon->getUserPokedex() === $this) {
+                $pokemon->setUserPokedex(null);
+            }
+        }
 
         return $this;
     }

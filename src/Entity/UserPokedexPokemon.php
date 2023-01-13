@@ -32,12 +32,12 @@ class UserPokedexPokemon
     #[ORM\JoinColumn(nullable: false)]
     private ?PokedexPokemon $pokemon = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userPokedexPokemon')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?UserPokedex $pokedex = null;
-
     #[ORM\ManyToOne(inversedBy: 'pokemon')]
     private ?Game $captureGame = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pokemon')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UserPokedex $pokedex = null;
 
     public function getId(): ?int
     {
@@ -92,18 +92,6 @@ class UserPokedexPokemon
         return $this;
     }
 
-    public function getPokedex(): ?UserPokedex
-    {
-        return $this->pokedex;
-    }
-
-    public function setPokedex(?UserPokedex $pokedex): self
-    {
-        $this->pokedex = $pokedex;
-
-        return $this;
-    }
-
     public function getCaptureGame(): ?Game
     {
         return $this->captureGame;
@@ -112,6 +100,18 @@ class UserPokedexPokemon
     public function setCaptureGame(?Game $game): self
     {
         $this->captureGame = $game;
+
+        return $this;
+    }
+
+    public function getPokedex(): ?UserPokedex
+    {
+        return $this->pokedex;
+    }
+
+    public function setPokedex(?UserPokedex $userPokedex): self
+    {
+        $this->pokedex = $userPokedex;
 
         return $this;
     }
