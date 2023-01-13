@@ -13,7 +13,7 @@
 
     <div class="row">
         <h1 class="col-10">Balls</h1>
-        <p class="col-2"><a href="" class="btn btn-primary">Créer une Ball</a></p>
+        <p class="col-2"><a href="" class="btn btn-primary">Créer une ball</a></p>
     </div>
 
     <table class="table text-center">
@@ -22,6 +22,7 @@
                 <th>Nom</th>
                 <th>Image</th>
                 <th>En ligne</th>
+                <th>Jeux</th>
                 <th>Créé le</th>
                 <th>Mis à jour le</th>
                 <th>Options</th>
@@ -33,6 +34,7 @@
                 <td>{{ ball.name }}</td>
                 <td><img src="{{ asset(ball.image) }}" alt="{{ ball.name }}"></td>
                 <td>{{ ball.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ ball.game.count }}</td>
                 <td>{{ ball.createdAt | date('d/m/y H:i') }}</td>
                 <td>{{ ball.updatedAt | date('d/m/y H:i') }}</td>
                 <td></td>
