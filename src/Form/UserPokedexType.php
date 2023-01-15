@@ -34,6 +34,10 @@ class UserPokedexType extends AbstractType
                 'label' => 'Version chromatique',
                 'required' => false,
             ])
+            ->add('preventSpoil', CheckboxType::class, [
+                'label' => 'Cacher les noms et images des Pokémon non attrapés.',
+                'required' => false,
+            ])
         ;
     }
 

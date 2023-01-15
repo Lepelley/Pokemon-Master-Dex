@@ -34,9 +34,20 @@
         {% for pokemon in pokedex.pokemon %}
             <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary js-captured" }}">
                 <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
-                    {{ pokemon.pokemon.pokemon.name }}<br>
-                    <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
-                                pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i><br>
+                    {% if pokedex.preventSpoil and not pokemon.isCaptured %}
+                        ???
+                    {% else %}
+                        {{ pokemon.pokemon.pokemon.name }}
+                    {% endif %}
+
+                    <br>
+
+                    {% if pokedex.preventSpoil and not pokemon.isCaptured %}
+                        <i class="bi bi-question-circle"></i>
+                    {% else %}
+                        <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
+                            pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i><br>
+                    {% endif %}
 
                     <span class="pokedex-pokemon__infos">
                         <span class="col">

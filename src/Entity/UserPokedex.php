@@ -41,6 +41,9 @@ class UserPokedex
 
     private ?int $pokemonCaughtPerCent = null;
 
+    #[ORM\Column]
+    private ?bool $preventSpoil = null;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -154,6 +157,18 @@ class UserPokedex
             return $this;
         }
         $this->pokemonCaughtPerCent = ceil($caught * 100 / $this->getPokemon()->count());
+
+        return $this;
+    }
+
+    public function isPreventSpoil(): ?bool
+    {
+        return $this->preventSpoil;
+    }
+
+    public function setPreventSpoil(bool $preventSpoil): self
+    {
+        $this->preventSpoil = $preventSpoil;
 
         return $this;
     }

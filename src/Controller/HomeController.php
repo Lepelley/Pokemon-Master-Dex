@@ -49,6 +49,10 @@ class HomeController extends AbstractController
             $totalPokemon += $dex->getPokemon()->count();
         }
 
+        if (0 === $totalPokemon) {
+            return 0;
+        }
+
         return ceil($totalCaught * 100 / $totalPokemon);
     }
 }
