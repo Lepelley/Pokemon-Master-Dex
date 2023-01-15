@@ -29,7 +29,7 @@ class Ball
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'balls')]
-    private Collection $game;
+    private Collection $games;
 
     #[ORM\OneToMany(mappedBy: 'captureBall', targetEntity: UserPokedexPokemon::class)]
     private Collection $userPokedexPokemon;
@@ -72,15 +72,15 @@ class Ball
     /**
      * @return Collection<int, Game>
      */
-    public function getGame(): Collection
+    public function getGames(): Collection
     {
-        return $this->game;
+        return $this->games;
     }
 
     public function addGame(Game $game): self
     {
-        if (!$this->game->contains($game)) {
-            $this->game->add($game);
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
         }
 
         return $this;
@@ -88,7 +88,7 @@ class Ball
 
     public function removeGame(Game $game): self
     {
-        $this->game->removeElement($game);
+        $this->games->removeElement($game);
 
         return $this;
     }

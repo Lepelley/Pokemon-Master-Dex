@@ -29,7 +29,7 @@ class BallType extends AbstractType
                 'label' => 'En ligne',
                 'required' => false,
             ])
-            ->add('game', EntityType::class, [
+            ->add('games', EntityType::class, [
                 'label' => 'Jeux',
                 'class' => Game::class,
                 'choice_label' => 'name',

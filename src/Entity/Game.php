@@ -25,10 +25,10 @@ class Game
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Ball::class, mappedBy: 'captureGame')]
+    #[ORM\ManyToMany(targetEntity: Ball::class, mappedBy: 'games')]
     private Collection $balls;
 
-    #[ORM\OneToMany(mappedBy: 'game', targetEntity: UserPokedexPokemon::class)]
+    #[ORM\OneToMany(mappedBy: 'captureGame', targetEntity: UserPokedexPokemon::class)]
     private Collection $pokemon;
 
     #[ORM\ManyToOne(inversedBy: 'games')]

@@ -36,7 +36,7 @@
                 <td>{{ ball.name }}</td>
                 <td><img src="{{ asset(ball.image) }}" alt="{{ ball.name }}"></td>
                 <td>{{ ball.isOnline ? "&#10003;" : "&#10060;" }}</td>
-                <td>{{ ball.game.count }}</td>
+                <td>{{ ball.games.count }}</td>
                 <td>{{ ball.createdAt | date('d/m/y H:i') }}</td>
                 <td>{{ ball.updatedAt | date('d/m/y H:i') }}</td>
                 <td>
