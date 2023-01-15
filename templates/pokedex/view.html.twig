@@ -32,6 +32,7 @@
     <main class="container mt-5">
         <div class="pokedex-view">
         {% for pokemon in pokedex.pokemon %}
+            {% if not (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable) %}
             <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary js-captured" }}">
                 <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
@@ -71,6 +72,7 @@
                     </span>
                 </a>
             </div>
+            {% endif %}
         {% endfor %}
         </div>
     </main>

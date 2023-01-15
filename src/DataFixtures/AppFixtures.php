@@ -74,6 +74,7 @@ class AppFixtures extends Fixture
             ->setCreatedAt($time)
             ->setUpdatedAt($time)
             ->setIsRegional(true)
+            ->setIsShinyUnavailable(false)
         ;
         $manager->persist($pokedex);
 
@@ -83,6 +84,7 @@ class AppFixtures extends Fixture
             ->setCreatedAt($time)
             ->setUpdatedAt($time)
             ->setIsRegional(true)
+            ->setIsShinyUnavailable(false)
         ;
         $manager->persist($pokedex);
 
@@ -92,6 +94,7 @@ class AppFixtures extends Fixture
             ->setCreatedAt($time)
             ->setUpdatedAt($time)
             ->setIsRegional(false)
+            ->setIsShinyUnavailable(false)
         ;
         $manager->persist($pokedex);
 
@@ -101,6 +104,7 @@ class AppFixtures extends Fixture
                 ->setPokedex($pokedex)
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
+                ->setIsShinyUnavailable(false)
             ;
             $manager->persist($dexMon);
         }

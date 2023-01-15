@@ -27,7 +27,8 @@ class UserPokedexType extends AbstractType
                 'query_builder' => function (PokedexRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->andWhere('u.isOnline = :val')
-                        ->setParameter('val', true);
+                        ->setParameter('val', true)
+                    ;
                 },
             ])
             ->add('isShiny', CheckboxType::class, [

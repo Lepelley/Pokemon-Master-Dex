@@ -37,6 +37,9 @@ class Pokedex
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: Game::class)]
     private Collection $games;
 
+    #[ORM\Column]
+    private ?bool $isShinyUnavailable = null;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -159,6 +162,18 @@ class Pokedex
                 $game->setPokedex(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsShinyUnavailable(): ?bool
+    {
+        return $this->isShinyUnavailable;
+    }
+
+    public function setIsShinyUnavailable(bool $isShinyUnavailable): self
+    {
+        $this->isShinyUnavailable = $isShinyUnavailable;
 
         return $this;
     }

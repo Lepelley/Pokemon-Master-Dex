@@ -30,17 +30,22 @@ class CreateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UserPokedex $pokedex */
             $pokedex = $form->getData();
-            $time = new \DateTimeImmutable();
-            $pokedex
-                ->setTrainer($this->getUser())
-                ->setCreatedAt($time)
-                ->setUpdatedAt($time)
-            ;
-            $this->createEntriesForPokedex($pokedex, $time);
-            $this->entityManager->persist($pokedex);
-            $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_pokedex_view', ['id' => $pokedex->getId()]);
+            if ($pokedex->getPokedex()->isIsShinyUnavailable() && $pokedex->isShiny()) {
+                $this->addFlash('danger', "Ce Pokédex n'est pas disponible en shiny.");
+            } else {
+                $time = new \DateTimeImmutable();
+                $pokedex
+                    ->setTrainer($this->getUser())
+                    ->setCreatedAt($time)
+                    ->setUpdatedAt($time)
+                ;
+                $this->createEntriesForPokedex($pokedex, $time);
+                $this->entityManager->persist($pokedex);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('app_pokedex_view', ['id' => $pokedex->getId()]);
+            }
         }
 
         return $this->render('pokedex/create.html.twig', [
@@ -51,17 +56,16 @@ class CreateController extends AbstractController
     private function createEntriesForPokedex(UserPokedex $pokedex, \DateTimeImmutable $time): void
     {
         foreach ($pokedex->getPokedex()->getPokemon() as $pokemon) {
-            $entry = (new UserPokedexPokemon())
-                ->setPokedex($pokedex)
-                ->setPokemon($pokemon)
-                ->setIsCaptured(false)
-                ->setCreatedAt($time)
-                ->setUpdatedAt($time)
-            ;
-            $entry->setPokedex($pokedex);
-            $entry->setPokemon($pokemon);
-            $entry->setIsCaptured(false);
-            $this->entityManager->persist($entry);
+            if (!($pokedex->isShiny() && $pokemon->isIsShinyUnavailable())) {
+                $entry = (new UserPokedexPokemon())
+                    ->setPokedex($pokedex)
+                    ->setPokemon($pokemon)
+                    ->setIsCaptured(false)
+                    ->setCreatedAt($time)
+                    ->setUpdatedAt($time)
+                ;
+                $this->entityManager->persist($entry);
+            }
         }
 
         return;

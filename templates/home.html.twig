@@ -18,7 +18,7 @@
             <p>
                 <a href="{{ path('app_pokedex_view', {id: pokedex.id}) }}">{{ pokedex.name }}</a>
                 {% if pokedex.shiny %}
-                    <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
+                    <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" style="height: 1rem" />
                 {% endif %}
                 {{ pokedex.pokemonCaught }} / {{ pokedex.pokemon.count }}
                 <br>

@@ -34,6 +34,18 @@ class PokedexPokemon
     #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
     private Collection $usersPokemon;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $specificName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $specificImage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $specificShinyImage = null;
+
+    #[ORM\Column]
+    private ?bool $isShinyUnavailable = null;
+
     public function __construct()
     {
         $this->usersPokemon = new ArrayCollection();
@@ -106,6 +118,54 @@ class PokedexPokemon
                 $usersPokemon->setPokemon(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSpecificName(): ?string
+    {
+        return $this->specificName;
+    }
+
+    public function setSpecificName(?string $specificName): self
+    {
+        $this->specificName = $specificName;
+
+        return $this;
+    }
+
+    public function getSpecificImage(): ?string
+    {
+        return $this->specificImage;
+    }
+
+    public function setSpecificImage(?string $specificImage): self
+    {
+        $this->specificImage = $specificImage;
+
+        return $this;
+    }
+
+    public function getSpecificShinyImage(): ?string
+    {
+        return $this->specificShinyImage;
+    }
+
+    public function setSpecificShinyImage(?string $specificShinyImage): self
+    {
+        $this->specificShinyImage = $specificShinyImage;
+
+        return $this;
+    }
+
+    public function isIsShinyUnavailable(): ?bool
+    {
+        return $this->isShinyUnavailable;
+    }
+
+    public function setIsShinyUnavailable(bool $isShinyUnavailable): self
+    {
+        $this->isShinyUnavailable = $isShinyUnavailable;
 
         return $this;
     }
