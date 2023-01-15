@@ -36,7 +36,7 @@ class Ball
 
     public function __construct()
     {
-        $this->game = new ArrayCollection();
+        $this->games = new ArrayCollection();
         $this->userPokedexPokemon = new ArrayCollection();
     }
 
