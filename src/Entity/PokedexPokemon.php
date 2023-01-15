@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\PokedexPokemonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PokedexPokemonRepository::class)]
@@ -29,8 +31,13 @@ class PokedexPokemon
     #[ORM\JoinColumn(nullable: false)]
     private ?Pokemon $pokemon = null;
 
-    #[ORM\OneToOne(mappedBy: 'pokemon', cascade: ['persist', 'remove'])]
-    private ?UserPokedexPokemon $userPokedexPokemon = null;
+    #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
+    private Collection $usersPokemon;
+
+    public function __construct()
+    {
+        $this->usersPokemon = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -73,19 +80,32 @@ class PokedexPokemon
         return $this;
     }
 
-    public function getUserPokedexPokemon(): ?UserPokedexPokemon
+    /**
+     * @return Collection<int, UserPokedexPokemon>
+     */
+    public function getUsersPokemon(): Collection
     {
-        return $this->userPokedexPokemon;
+        return $this->usersPokemon;
     }
 
-    public function setUserPokedexPokemon(UserPokedexPokemon $userPokedexPokemon): self
+    public function addUsersPokemon(UserPokedexPokemon $usersPokemon): self
     {
-        // set the owning side of the relation if necessary
-        if ($userPokedexPokemon->getPokemon() !== $this) {
-            $userPokedexPokemon->setPokemon($this);
+        if (!$this->usersPokemon->contains($usersPokemon)) {
+            $this->usersPokemon->add($usersPokemon);
+            $usersPokemon->setPokemon($this);
         }
 
-        $this->userPokedexPokemon = $userPokedexPokemon;
+        return $this;
+    }
+
+    public function removeUsersPokemon(UserPokedexPokemon $usersPokemon): self
+    {
+        if ($this->usersPokemon->removeElement($usersPokemon)) {
+            // set the owning side to null (unless already changed)
+            if ($usersPokemon->getPokemon() === $this) {
+                $usersPokemon->setPokemon(null);
+            }
+        }
 
         return $this;
     }
