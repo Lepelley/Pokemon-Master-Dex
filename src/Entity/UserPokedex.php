@@ -134,31 +134,30 @@ class UserPokedex
 
     public function getPokemonCaught(): ?int
     {
+        if (null === $this->pokemonCaught) {
+            $this->pokemonCaught = 0;
+            /** @var UserPokedexPokemon $pokemon */
+            foreach ($this->pokemon as $pokemon) {
+                if ($pokemon->isCaptured()) {
+                    $this->pokemonCaught++;
+                }
+            }
+        }
+
         return $this->pokemonCaught;
-    }
-
-    public function setPokemonCaught(?int $pokemonCaught): self
-    {
-        $this->pokemonCaught = $pokemonCaught;
-
-        return $this;
     }
 
     public function getPokemonCaughtPerCent(): ?int
     {
-        return $this->pokemonCaughtPerCent;
-    }
-
-    public function setPokemonCaughtPerCent(int $caught): self
-    {
         if (0 === $this->getPokemon()->count()) {
-            $this->pokemonCaughtPerCent = 0;
-
-            return $this;
+            return 0;
         }
-        $this->pokemonCaughtPerCent = ceil($caught * 100 / $this->getPokemon()->count());
 
-        return $this;
+        if (null === $this->pokemonCaughtPerCent) {
+            $this->pokemonCaughtPerCent = ceil($this->pokemonCaught * 100 / $this->getPokemon()->count());
+        }
+
+        return $this->pokemonCaughtPerCent;
     }
 
     public function isPreventSpoil(): ?bool

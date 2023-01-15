@@ -44,7 +44,7 @@ class UserPokedexPokemon
         return $this->id;
     }
 
-    public function isIsCaptured(): ?bool
+    public function isCaptured(): ?bool
     {
         return $this->isCaptured;
     }
