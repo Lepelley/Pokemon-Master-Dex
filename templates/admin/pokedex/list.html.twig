@@ -36,7 +36,7 @@
                 <td>{{ dex.name }}</td>
                 <td>{{ dex.pokemon.count }}</td>
                 <td>{{ dex.games.count }}</td>
-                <td>{{ dex.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ dex.isOnline ? '<i class="bi bi-check-circle"></i>' : "&#10060;" }}</td>
                 <td>{{ dex.createdAt | date('d/m/Y H:i') }}</td>
                 <td>{{ dex.updatedAt | date('d/m/Y H:i') }}</td>
                 <td>

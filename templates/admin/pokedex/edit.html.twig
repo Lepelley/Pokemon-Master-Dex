@@ -7,7 +7,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
             <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Administration</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('app_admin_game_list') }}">Pokédex</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_admin_pokedex_list') }}">Pokédex</a></li>
             <li class="breadcrumb-item active" aria-current="page">Modifier le Pokédex {{ pokedex.name }}</li>
         </ol>
     </nav>
@@ -16,6 +16,35 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
+
     <button class="btn btn-success">Modifier</button>
     {{ form_end(form) }}
+
+    <h2 class="mt-2">Pokémon</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Options</th>
+            <th>Nom</th>
+            <th>Numéro régional</th>
+            <th>Numéro national</th>
+            <th>Image</th>
+            <th>Shiny disponible</th>
+        </tr>
+        {% for pokemon in pokedex.pokemon %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_admin_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
+                <td>{{ pokemon.pokemon.name }}</td>
+                <td>{{ pokemon.regionalNumber }}</td>
+                <td>{{ pokemon.pokemon.nationalNumber }}</td>
+                <td>
+                    <span><i class="pkicon pkicon-{{ pokemon.pokemon.spriteNumber}}"></i></span>
+                </td>
+                <td>{{ not pokemon.shinyUnavailable ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
