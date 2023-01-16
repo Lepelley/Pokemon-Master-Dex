@@ -31,7 +31,7 @@ class CreateController extends AbstractController
             /** @var UserPokedex $pokedex */
             $pokedex = $form->getData();
 
-            if ($pokedex->getPokedex()->isIsShinyUnavailable() && $pokedex->isShiny()) {
+            if ($pokedex->getPokedex()->isShinyUnavailable() && $pokedex->isShiny()) {
                 $this->addFlash('danger', "Ce Pokédex n'est pas disponible en shiny.");
             } else {
                 $time = new \DateTimeImmutable();
@@ -56,16 +56,14 @@ class CreateController extends AbstractController
     private function createEntriesForPokedex(UserPokedex $pokedex, \DateTimeImmutable $time): void
     {
         foreach ($pokedex->getPokedex()->getPokemon() as $pokemon) {
-            if (!($pokedex->isShiny() && $pokemon->isIsShinyUnavailable())) {
-                $entry = (new UserPokedexPokemon())
-                    ->setPokedex($pokedex)
-                    ->setPokemon($pokemon)
-                    ->setIsCaptured(false)
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                ;
-                $this->entityManager->persist($entry);
-            }
+            $entry = (new UserPokedexPokemon())
+                ->setPokedex($pokedex)
+                ->setPokemon($pokemon)
+                ->setIsCaptured(false)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $this->entityManager->persist($entry);
         }
 
         return;

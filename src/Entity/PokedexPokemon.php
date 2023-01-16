@@ -158,7 +158,7 @@ class PokedexPokemon
         return $this;
     }
 
-    public function isIsShinyUnavailable(): ?bool
+    public function isShinyUnavailable(): ?bool
     {
         return $this->isShinyUnavailable;
     }

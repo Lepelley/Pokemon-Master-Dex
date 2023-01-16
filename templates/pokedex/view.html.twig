@@ -19,7 +19,7 @@
     </h1>
 
     <h2 class="text-center">
-        {{ pokedex.pokemonCaught }} / {{ pokedex.pokemon.count }}
+        {{ pokedex.pokemonCaught }} / {{ pokedex.pokemonCount }}
     </h2>
 
     <div style="width: 50%;margin: 0 auto;">
@@ -32,9 +32,12 @@
     <main class="container mt-5">
         <div class="pokedex-view">
         {% for pokemon in pokedex.pokemon %}
-            {% if not (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable) %}
-            <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary js-captured" }}">
-                {% if app.user.id == pokedex.trainer.id %}
+            <div class="pokedex-view__pokemon flex-fill
+                {{ (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable)
+                    ? 'bg-secondary'
+                    : pokemon.isCaptured ? "bg-primary js-captured" }}"
+            >
+                {% if (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable) %}
                     <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
                 {% endif %}
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
@@ -76,7 +79,6 @@
                         </a>
                     {% endif %}
             </div>
-            {% endif %}
         {% endfor %}
         </div>
     </main>

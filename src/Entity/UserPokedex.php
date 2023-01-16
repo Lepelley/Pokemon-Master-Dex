@@ -37,12 +37,14 @@ class UserPokedex
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
     private Collection $pokemon;
 
-    private ?int $pokemonCaught = null;
-
-    private ?int $pokemonCaughtPerCent = null;
-
     #[ORM\Column]
     private ?bool $preventSpoil = null;
+
+    private ?int $pokemonCaught = null;
+
+    private ?int $pokemonCount = null;
+
+    private ?int $pokemonCaughtPerCent = null;
 
     public function __construct()
     {
@@ -138,7 +140,11 @@ class UserPokedex
             $this->pokemonCaught = 0;
             /** @var UserPokedexPokemon $pokemon */
             foreach ($this->pokemon as $pokemon) {
-                if ($pokemon->isCaptured()) {
+                if (
+                    $pokemon->isCaptured() &&
+                    $this->isShiny &&
+                    false === $pokemon->getPokemon()->isShinyUnavailable()
+                ) {
                     $this->pokemonCaught++;
                 }
             }
@@ -153,11 +159,35 @@ class UserPokedex
             return 0;
         }
 
-        if (null === $this->pokemonCaughtPerCent) {
-            $this->pokemonCaughtPerCent = ceil($this->pokemonCaught * 100 / $this->getPokemon()->count());
-        }
+        $this->pokemonCaughtPerCent = ceil($this->pokemonCaught * 100 / $this->pokemonCount);
 
         return $this->pokemonCaughtPerCent;
+    }
+
+    public function getPokemonCount(): int
+    {
+        if (0 === $this->getPokemon()->count()) {
+            return 0;
+        }
+
+        if (null === $this->pokemonCount) {
+            if (false === $this->isShiny) {
+                $this->pokemonCount = $this->getPokemon()->count();
+
+                return $this->pokemonCount;
+            }
+
+            $total = 0;
+            foreach ($this->getPokemon() as $pokemon) {
+                if (false === $pokemon->getPokemon()->isShinyUnavailable()) {
+                    $total++;
+                }
+            }
+
+            $this->pokemonCount = $total;
+        }
+
+        return $this->pokemonCount;
     }
 
     public function isPreventSpoil(): ?bool
