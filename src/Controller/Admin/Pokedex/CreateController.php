@@ -20,9 +20,7 @@ class CreateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $pokedex = new Pokedex();
-        $form = $this->createForm(PokedexType::class, $pokedex);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(PokedexType::class, $pokedex)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Pokedex $pokedex */

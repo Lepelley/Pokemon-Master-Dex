@@ -20,9 +20,7 @@ class CreateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $ball = new Ball();
-        $form = $this->createForm(BallType::class, $ball);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(BallType::class, $ball)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Ball $ball */

@@ -19,9 +19,7 @@ class EditController extends AbstractController
 
     public function __invoke(Request $request, Pokedex $pokedex): Response
     {
-        $form = $this->createForm(PokedexType::class, $pokedex);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(PokedexType::class, $pokedex)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Pokedex $pokedex */

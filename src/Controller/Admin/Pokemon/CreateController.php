@@ -20,9 +20,7 @@ class CreateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $pokemon = new Pokemon();
-        $form = $this->createForm(PokemonType::class, $pokemon);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(PokemonType::class, $pokemon)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Pokemon $pokemon */

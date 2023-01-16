@@ -19,9 +19,7 @@ class EditController extends AbstractController
 
     public function __invoke(Request $request, Game $game): Response
     {
-        $form = $this->createForm(GameType::class, $game);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(GameType::class, $game)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Game $game */
