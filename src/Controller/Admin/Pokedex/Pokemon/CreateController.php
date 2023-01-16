@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Pokedex\Pokemon;
 
+use App\Entity\Pokedex;
 use App\Entity\PokedexPokemon;
 use App\Form\PokedexPokemonType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,30 +11,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/pokedex/pokemon/{id}', name: 'app_admin_pokedex_pokemon_edit')]
-class EditController extends AbstractController
+#[Route('/admin/pokedex/{id}/pokemon/create', name: 'app_admin_pokedex_pokemon_create')]
+class CreateController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
     ) {}
 
-    public function __invoke(PokedexPokemon $pokemon, Request $request): Response
+    public function __invoke(Pokedex $pokedex, Request $request): Response
     {
+        $pokemon = new PokedexPokemon();
         $form = $this->createForm(PokedexPokemonType::class, $pokemon)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var PokedexPokemon $pokemon */
             $pokemon = $form->getData();
-            $pokemon->setUpdatedAt(new \DateTimeImmutable());
+            $time = new \DateTimeImmutable();
+            $pokemon
+                ->setPokedex($pokedex)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
             $this->entityManager->persist($pokemon);
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_admin_pokedex_edit', ['id' => $pokemon->getPokedex()->getId()]);
         }
 
-        return $this->render('admin/pokedex/pokemon/edit.html.twig', [
+        return $this->render('admin/pokedex/pokemon/create.html.twig', [
             'form' => $form->createView(),
-            'pokemon' => $pokemon,
+            'pokedex' => $pokedex,
         ]);
     }
 }

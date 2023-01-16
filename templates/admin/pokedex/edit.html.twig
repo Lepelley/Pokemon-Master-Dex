@@ -20,7 +20,12 @@
     <button class="btn btn-success">Modifier</button>
     {{ form_end(form) }}
 
-    <h2 class="mt-2">Pokémon</h2>
+    <h2 class="mt-2">
+        Pokémon
+        <a href="{{ path('app_admin_pokedex_pokemon_create', {id: pokedex.id}) }}" class="btn btn-primary">
+            Ajouter <i class="bi bi-plus-circle"></i>
+        </a>
+    </h2>
     <table class="table table-striped">
         <tr>
             <th>Options</th>
