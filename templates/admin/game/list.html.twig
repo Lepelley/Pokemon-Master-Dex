@@ -32,7 +32,7 @@
         {% for game in games %}
             <tr>
                 <td>{{ game.name }}</td>
-                <td>{{ game.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ game.isOnline ? '<i class="bi bi-check-circle"></i>' : "&#10060;" }}</td>
                 <td>{{ game.createdAt | date('d/m/y H:i') }}</td>
                 <td>{{ game.updatedAt | date('d/m/y H:i') }}</td>
                 <td>

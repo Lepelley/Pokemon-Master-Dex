@@ -13,7 +13,9 @@
 
     <div class="row">
         <h1 class="col-10">Pokédex</h1>
-        <p class="col-2"><a href="" class="btn btn-primary">Créer un pokédex</a></p>
+        <p class="col-2">
+            <a href="{{ path('app_admin_pokemon_create') }}" class="btn btn-primary">Ajouter un Pokémon</a>
+        </p>
     </div>
 
     <table class="table text-center">
@@ -37,9 +39,14 @@
                 <td>
                     <span><i class="pkicon color-shiny pkicon-{{ poke.spriteNumber}}"></i></span>
                 </td>
-                <td>{{ poke.isOnline ? "&#10003;" : "&#10060;" }}</td>
+                <td>{{ poke.isOnline ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
                 <td>{{ poke.createdAt | date('d/m/y H:i') }}</td>
                 <td>{{ poke.updatedAt | date('d/m/y H:i') }}</td>
+                <td>
+                    <a href="{{ path('app_admin_pokemon_edit', {id: poke.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
