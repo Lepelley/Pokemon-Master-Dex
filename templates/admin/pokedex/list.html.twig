@@ -13,7 +13,9 @@
 
     <div class="row">
         <h1 class="col-10">Pokédex</h1>
-        <p class="col-2"><a href="" class="btn btn-primary">Créer un pokédex</a></p>
+        <p class="col-2">
+            <a href="{{ path('app_admin_pokedex_create') }}" class="btn btn-primary">Ajouter un Pokédex</a>
+        </p>
     </div>
 
     <table class="table table-striped text-center">
@@ -37,7 +39,11 @@
                 <td>{{ dex.isOnline ? "&#10003;" : "&#10060;" }}</td>
                 <td>{{ dex.createdAt | date('d/m/Y H:i') }}</td>
                 <td>{{ dex.updatedAt | date('d/m/Y H:i') }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ path('app_admin_pokedex_edit', {id: dex.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
