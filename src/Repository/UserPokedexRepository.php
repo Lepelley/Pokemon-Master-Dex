@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\UserPokedex;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<UserPokedex>
@@ -63,4 +64,14 @@ class UserPokedexRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findWithUser(UserInterface $user)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.trainer = :val')
+            ->setParameter('val', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

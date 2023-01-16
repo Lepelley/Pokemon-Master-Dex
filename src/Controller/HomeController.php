@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\UserPokedex;
 use App\Repository\UserPokedexRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,14 +16,20 @@ class HomeController extends AbstractController
         private readonly UserPokedexRepository $userPokedexRepository,
     ) {}
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
-        $pokedex = $this->userPokedexRepository->findAll();
+        if ($this->getUser()) {
+            $pokedex = $this->userPokedexRepository->findWithUser($this->getUser());
 
-        return $this->render('home.html.twig', [
-            'user_pokedex' => $pokedex,
-            'completion' => $this->calculateCompletion($pokedex),
-        ]);
+            return $this->render('home.html.twig', [
+                'user_pokedex' => $pokedex,
+                'completion' => $this->calculateCompletion($pokedex),
+            ]);
+        }
+
+        dump($request);
+
+        return $this->render('home.html.twig');
     }
 
     /**
