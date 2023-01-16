@@ -13,7 +13,9 @@
 
     <div class="row">
         <h1 class="col-10">Jeux</h1>
-        <p class="col-2"><a href="" class="btn btn-primary">Créer un jeu</a></p>
+        <p class="col-2">
+            <a href="{{ path('app_admin_game_create') }}" class="btn btn-primary">Créer un jeu</a>
+        </p>
     </div>
 
     <table class="table table-striped text-center">
@@ -33,7 +35,11 @@
                 <td>{{ game.isOnline ? "&#10003;" : "&#10060;" }}</td>
                 <td>{{ game.createdAt | date('d/m/y H:i') }}</td>
                 <td>{{ game.updatedAt | date('d/m/y H:i') }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ path('app_admin_game_edit', {id: game.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
