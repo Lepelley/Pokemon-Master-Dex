@@ -11,4 +11,6 @@
 
 - specificImages => new Entity "Image"
 
+- pokedex public/privé ?
+
 - mode large : un pokémon par ligne : affiche la note sur la droite (option dans le pokédex pour savoir quel mode affiché)

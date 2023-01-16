@@ -34,7 +34,9 @@
         {% for pokemon in pokedex.pokemon %}
             {% if not (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable) %}
             <div class="pokedex-view__pokemon flex-fill {{  pokemon.isCaptured ? "bg-primary js-captured" }}">
-                <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
+                {% if app.user.id == pokedex.trainer.id %}
+                    <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark">
+                {% endif %}
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
                         ???
                     {% else %}
@@ -70,7 +72,9 @@
                             {% endif %}
                         </span>
                     </span>
-                </a>
+                    {% if app.user.id == pokedex.trainer.id %}
+                        </a>
+                    {% endif %}
             </div>
             {% endif %}
         {% endfor %}
