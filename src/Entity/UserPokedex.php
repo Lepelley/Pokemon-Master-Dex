@@ -141,9 +141,8 @@ class UserPokedex
             /** @var UserPokedexPokemon $pokemon */
             foreach ($this->pokemon as $pokemon) {
                 if (
-                    $pokemon->isCaptured() &&
-                    $this->isShiny &&
-                    false === $pokemon->getPokemon()->isShinyUnavailable()
+                    ($pokemon->isCaptured() && false  === $this->isShiny) ||
+                    $pokemon->isCaptured() && $this->isShiny && false === $pokemon->getPokemon()->isShinyUnavailable()
                 ) {
                     $this->pokemonCaught++;
                 }
