@@ -1,6 +1,8 @@
 # TODO
 - logo du jeu
 
+- profil utilisateur (mot de passe, etc)
+
 - faire la mise à jour du Pokédex (vérifie que les données des PokedexPokemon et des UserPokedexPokemon sont identiques)
 
 - rajouter plus de AddFlash pour chaque interaction

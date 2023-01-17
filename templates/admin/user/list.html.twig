@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent()}} &raquo; Utilisateurs {% endblock %}
+
+{% block body %}
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+        </ol>
+    </nav>
+
+    <h1>Utilisateurs</h1>
+
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Pseudonyme</th>
+            <th>Rôles</th>
+            <th>Créé le</th>
+            <th>Mis à jour le</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nickname }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>{{ user.createdAt | date('d/m/Y H:i') }}</td>
+                <td>{{ user.updatedAt | date('d/m/Y H:i') }}</td>
+                <td>
+                    <a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
