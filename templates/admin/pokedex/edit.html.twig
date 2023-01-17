@@ -41,6 +41,12 @@
                     <a href="{{ path('app_admin_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="btn btn-primary">
                         Modifier <i class="bi bi-pencil-fill"></i>
                     </a>
+                    <form action="{{ url('app_admin_pokedex_pokemon_delete', {id: pokemon.id}) }}" method="post" data-confirmation="true" id="delete-form" style="display: inline">
+                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+                        <button type="submit" class="btn btn-block btn-danger" style="display: inline-block">
+                            Supprimer <i class="bi bi-trash3"></i>
+                        </button>
+                    </form>
                 </td>
                 <td>{{ pokemon.pokemon.name }}</td>
                 <td>{{ pokemon.regionalNumber }}</td>

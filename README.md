@@ -1,6 +1,10 @@
 # TODO
 - logo du jeu
 
+- rajouter plus de AddFlash pour chaque interaction
+
+- virer les dépendances à l'Abstract Controller
+
 - catégories de pokémon (pour les formes, régionaux, sexes, etc.) pour HOME seulement
 
 - Progress bar sur l'accueil et sur la Pokédex View (meilleur vue)
