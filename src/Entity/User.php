@@ -38,6 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'trainer', targetEntity: UserPokedex::class, orphanRemoval: true)]
     private Collection $pokedex;
 
+    private ?string $plainPassword = null;
+
     public function __construct()
     {
         $this->pokedex = new ArrayCollection();
@@ -95,7 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getNickname(): ?string
@@ -136,6 +138,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $pokedex->setTrainer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $password): self
+    {
+        $this->plainPassword = $password;
 
         return $this;
     }
