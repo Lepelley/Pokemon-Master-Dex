@@ -1,7 +1,13 @@
 # TODO
 - logo du jeu
 
+- cards pour afficher les dex sur la Home en connecté
+
 - profil utilisateur (mot de passe, etc)
+
+- CreatePokedex => Choisis ton jeu de base et ça filtre les pokédex possibles
+
+- année pour les dex ou les jeux pour le tri
 
 - faire la mise à jour du Pokédex (vérifie que les données des PokedexPokemon et des UserPokedexPokemon sont identiques)
 

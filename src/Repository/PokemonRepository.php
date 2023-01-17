@@ -39,6 +39,16 @@ class PokemonRepository extends ServiceEntityRepository
         }
     }
 
+    public function findNationalBefore($value): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nationalNumber < :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Pokemon[] Returns an array of Pokemon objects
 //     */

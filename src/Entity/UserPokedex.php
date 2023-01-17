@@ -157,8 +157,9 @@ class UserPokedex
         if (0 === $this->getPokemon()->count()) {
             return 0;
         }
-
-        $this->pokemonCaughtPerCent = ceil($this->pokemonCaught * 100 / $this->pokemonCount);
+        if (null === $this->pokemonCaughtPerCent) {
+            $this->pokemonCaughtPerCent = ceil($this->pokemonCaught * 100 / $this->pokemonCount);
+        }
 
         return $this->pokemonCaughtPerCent;
     }

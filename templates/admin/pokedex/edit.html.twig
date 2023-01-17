@@ -43,7 +43,8 @@
                     </a>
                     <form action="{{ url('app_admin_pokedex_pokemon_delete', {id: pokemon.id}) }}" method="post" data-confirmation="true" id="delete-form" style="display: inline">
                         <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
-                        <button type="submit" class="btn btn-block btn-danger" style="display: inline-block">
+                        <button type="submit" class="btn btn-block btn-danger" style="display: inline-block"
+                                onclick="return confirm('Voulez-vous vraiment supprimer {{ pokemon.pokemon.name }} de {{ pokedex.name }} ?')">
                             Supprimer <i class="bi bi-trash3"></i>
                         </button>
                     </form>

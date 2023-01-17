@@ -1,0 +1,30 @@
+# Pokédex
+
+- [x] HOME
+- [x] Ecarlate & Violet
+- [x] Légendes: Arceus
+- [x] National de quatrième génération
+- [ ] Diamant Etincelant & Perle Scintillante
+- [ ] Epée & Bouclier DLC 2 : Couronneige
+- [ ] Epée & Bouclier DLC 1 : Île Solitaire de l'Armure
+- [ ] Epée & Bouclier
+- [ ] Vert, Rouge, Bleu, Jaune, Let's Go Pikachu & Let's Go Evoli
+- [ ] Ultra-Soleil et Ultra-Lune
+- [ ] Soleil & Lune
+- [ ] National 6G
+- [ ] Rubis Oméga & Saphir Alpha
+- [ ] X & Y
+- [ ] National de cinquième génération
+- [ ] Noir 2 & Blanc 2
+- [ ] Noir & Blanc
+- [ ] HeartGold & SoulSilver
+- [ ] Platine
+- [ ] Diamant & Perle
+- [ ] National de Troisième Génération
+- [ ] XD : Le Souffle des Ténèbres
+- [ ] Rouge Feu & Vert Feuille
+- [ ] Colosseum
+- [ ] Rubis & Saphir
+- [ ] National de deuxième génération
+- [ ] Cristal
+- [ ] Or & Argent

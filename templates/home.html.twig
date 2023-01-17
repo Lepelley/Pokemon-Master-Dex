@@ -32,6 +32,11 @@
         {% endfor %}
 
     {% else %}
-        <a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
+        <h1>Bienvenue sur Master-Dex</h1>
+        <p>
+            Bienvenue visiteur, le site qui permet de gérer vos Pokédex de la première à la dernière génération
+            sortie !<br>
+            Les images proviennent de <a href="https://msikma.github.io/pokesprite/">msikma/pokesprite</a>.
+        </p>
     {% endif %}
 {% endblock %}
