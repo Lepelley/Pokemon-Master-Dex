@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
         $manager->persist($game);
 
         $pokedex = (new Pokedex())
-            ->setName('Écarlate & Violet')
+            ->setName('Paldea')
             ->setIsOnline(true)
             ->setCreatedAt($time)
             ->setUpdatedAt($time)

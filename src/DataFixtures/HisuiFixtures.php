@@ -29,7 +29,7 @@ class HisuiFixtures extends Fixture
         $manager->persist($game);
 
         $pokedex = (new Pokedex())
-            ->setName('Légendes : Arceus')
+            ->setName('Hisui')
             ->setIsOnline(true)
             ->setCreatedAt($time)
             ->setUpdatedAt($time)
@@ -41,7 +41,7 @@ class HisuiFixtures extends Fixture
         $fileHandle = fopen("var/hisui.csv", "r");
         while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
             $pokemon = (new PokedexPokemon())
-                ->setRegionalNumber((int) substr($row[0], 1))
+                ->setRegionalNumber($row[0])
                 ->setPokemon($this->pokemonRepository->findOneBy(['name' => $row[2]]))
                 ->setIsShinyUnavailable(false)
                 ->setCreatedAt($time)

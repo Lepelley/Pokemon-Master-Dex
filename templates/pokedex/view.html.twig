@@ -10,13 +10,18 @@
         </ol>
     </nav>
 
-    <h1 class="text-center">
-        {{ pokedex.name }}
-        {% if pokedex.shiny %}
-            <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
-        {% endif %}
-        de {{ pokedex.trainer.nickname }}
-    </h1>
+    <div class="row">
+        <h1 class="col-10">
+            {{ pokedex.name }}
+            {% if pokedex.shiny %}
+                <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
+            {% endif %}
+            de {{ pokedex.trainer.nickname }}
+        </h1>
+        <p class="col-2">
+            <a href="{{ path('app_pokedex_edit', {id: pokedex.id}) }}" class="btn btn-primary">Modifier mon Pokédex</a>
+        </p>
+    </div>
 
     <h2 class="text-center">
         {{ pokedex.pokemonCaught }} / {{ pokedex.pokemonCount }}

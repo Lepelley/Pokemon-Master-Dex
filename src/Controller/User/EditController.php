@@ -37,7 +37,7 @@ class EditController extends AbstractController
             $user
                 ->setUpdatedAt(new \DateTimeImmutable())
             ;
-            
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 

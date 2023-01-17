@@ -26,7 +26,7 @@ class PaldeaFixtures extends Fixture
                 ->setIsShinyUnavailable(false)
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
-                ->setPokedex($this->pokedexRepository->findOneBy(['name' => 'Écarlate & Violet']))
+                ->setPokedex($this->pokedexRepository->findOneBy(['name' => 'Paldea']))
             ;
             if ($this->pokemonRepository->findOneBy(['name' => $row[2]]) === null) {
                 dump($row[2]);
