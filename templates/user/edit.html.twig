@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    {{ parent() }} &raquo; Créer un pokédex
-{% endblock %}
+{% block title %}{{ parent() }} &raquo; Profil &raquo; Modifier mon profil{% endblock %}
 
 {% block body %}
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Créer un Pokédex</li>
+            <li class="breadcrumb-item">Profil</li>
+            <li class="breadcrumb-item active" aria-current="page">Modifier mon profil</li>
         </ol>
     </nav>
-    <h1>Créer un pokédex</h1>
+
+    <h1>Modifier mon profil</h1>
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Créer" class="btn btn-success" />
+    <button class="btn btn-success">Modifier</button>
     {{ form_end(form) }}
 {% endblock %}

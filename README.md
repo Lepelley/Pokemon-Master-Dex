@@ -3,7 +3,7 @@
 
 - cards pour afficher les dex sur la Home en connecté
 
-- profil utilisateur (mot de passe, etc)
+- profil utilisateur
 
 - CreatePokedex => Choisis ton jeu de base et ça filtre les pokédex possibles
 
