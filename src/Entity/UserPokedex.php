@@ -46,6 +46,9 @@ class UserPokedex
 
     private ?int $pokemonCaughtPerCent = null;
 
+    #[ORM\ManyToOne(inversedBy: 'userPokedex')]
+    private ?Game $baseGame = null;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -198,6 +201,18 @@ class UserPokedex
     public function setPreventSpoil(bool $preventSpoil): self
     {
         $this->preventSpoil = $preventSpoil;
+
+        return $this;
+    }
+
+    public function getBaseGame(): ?Game
+    {
+        return $this->baseGame;
+    }
+
+    public function setBaseGame(?Game $baseGame): self
+    {
+        $this->baseGame = $baseGame;
 
         return $this;
     }

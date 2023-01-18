@@ -34,11 +34,11 @@ class Pokedex
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedex::class, orphanRemoval: true)]
     private Collection $allUsersPokedex;
 
-    #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: Game::class)]
-    private Collection $games;
-
     #[ORM\Column]
     private ?bool $isShinyUnavailable = null;
+
+    #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'pokedex')]
+    private Collection $games;
 
     public function __construct()
     {
@@ -136,6 +136,18 @@ class Pokedex
         return $this;
     }
 
+    public function isShinyUnavailable(): ?bool
+    {
+        return $this->isShinyUnavailable;
+    }
+
+    public function setIsShinyUnavailable(bool $isShinyUnavailable): self
+    {
+        $this->isShinyUnavailable = $isShinyUnavailable;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Game>
      */
@@ -148,7 +160,6 @@ class Pokedex
     {
         if (!$this->games->contains($game)) {
             $this->games->add($game);
-            $game->setPokedex($this);
         }
 
         return $this;
@@ -156,24 +167,7 @@ class Pokedex
 
     public function removeGame(Game $game): self
     {
-        if ($this->games->removeElement($game)) {
-            // set the owning side to null (unless already changed)
-            if ($game->getPokedex() === $this) {
-                $game->setPokedex(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function isShinyUnavailable(): ?bool
-    {
-        return $this->isShinyUnavailable;
-    }
-
-    public function setIsShinyUnavailable(bool $isShinyUnavailable): self
-    {
-        $this->isShinyUnavailable = $isShinyUnavailable;
+        $this->games->removeElement($game);
 
         return $this;
     }

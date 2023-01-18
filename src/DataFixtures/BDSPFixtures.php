@@ -2,13 +2,15 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Game;
+use App\Entity\Pokedex;
 use App\Entity\PokedexPokemon;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class PaldeaFixtures extends Fixture
+class BDSPFixtures extends Fixture
 {
     public function __construct(
         private readonly PokemonRepository $pokemonRepository,
@@ -18,7 +20,9 @@ class PaldeaFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $time = new \DateTimeImmutable();
-        $fileHandle = fopen("var/paldea.csv", "r");
+        $pokedex = $this->pokedexRepository->findOneBy(['name' => 'Sinnoh de Diamant Étincelant & Perle Scintillante']);
+
+        $fileHandle = fopen("var/sinnoh.csv", "r");
         while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
             $pokemon = (new PokedexPokemon())
                 ->setRegionalNumber((int) substr($row[0], 1))
@@ -26,13 +30,12 @@ class PaldeaFixtures extends Fixture
                 ->setIsShinyUnavailable(false)
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
-                ->setPokedex($this->pokedexRepository->findOneBy(['name' => 'Paldea']))
+                ->setPokedex($pokedex)
             ;
             if ($this->pokemonRepository->findOneBy(['name' => $row[2]]) === null) {
                 dump($row[2]);
             }
             $manager->persist($pokemon);
-            $manager->flush();
         }
         $manager->flush();
     }

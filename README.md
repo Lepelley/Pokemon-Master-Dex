@@ -5,6 +5,8 @@
 
 - profil utilisateur
 
+- priority pour les pokédex sur la home page pour trier
+
 - CreatePokedex => Choisis ton jeu de base et ça filtre les pokédex possibles
 
 - année pour les dex ou les jeux pour le tri

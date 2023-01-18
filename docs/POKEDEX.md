@@ -3,28 +3,31 @@
 - [x] HOME
 - [x] Paldea (Ecarlate & Violet)
 - [x] Hisui (Légendes: Arceus)
-- [x] National de quatrième génération
-- [ ] Sinnoh (DP & BDSP)
-- [ ] Couronneige
-- [ ] Isolarmure 
-- [ ] Galar (Epée & Bouclier)
-- [ ] Let's Go Pikachu & Evoli
+- [x] Sinnoh (DP & BDSP)
+- [x] Couronneige
+- [x] Isolarmure 
+- [x] Galar (Epée & Bouclier)
+- [x] Let's Go Pikachu & Evoli
 - [ ] Ultra-Soleil et Ultra-Lune
 - [ ] Alola (Soleil & Lune)
-- [ ] National 6G
 - [ ] Rubis Oméga & Saphir Alpha
 - [ ] Kalos (X & Y)
-- [ ] National de cinquième génération
 - [ ] Noir 2 & Blanc 2
 - [ ] Unys (Noir & Blanc)
 - [ ] HeartGold & SoulSilver
 - [ ] Platine
-- [ ] National de Troisième Génération
 - [ ] XD : Le Souffle des Ténèbres
+- [ ] Émeraude
 - [ ] Rouge Feu & Vert Feuille
 - [ ] Colosseum
 - [ ] Hoenn (Rubis & Saphir)
-- [ ] National de deuxième génération
 - [ ] Cristal
 - [ ] Johto (Or & Argent)
 - [ ] Kanto (RVBJ)
+- [ ] National 7G
+- [ ] National 6G
+- [ ] National 5G
+- [x] National 4G
+- [ ] National 3G
+- [ ] National 2G
+- [ ] National 1G

@@ -31,13 +31,21 @@ class Game
     #[ORM\OneToMany(mappedBy: 'captureGame', targetEntity: UserPokedexPokemon::class)]
     private Collection $pokemon;
 
-    #[ORM\ManyToOne(inversedBy: 'games')]
-    private ?Pokedex $pokedex = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $releaseDate = null;
+
+    #[ORM\OneToMany(mappedBy: 'baseGame', targetEntity: UserPokedex::class)]
+    private Collection $userPokedex;
+
+    #[ORM\ManyToMany(targetEntity: Pokedex::class, mappedBy: 'games')]
+    private Collection $pokedex;
 
     public function __construct()
     {
         $this->balls = new ArrayCollection();
         $this->pokemon = new ArrayCollection();
+        $this->userPokedex = new ArrayCollection();
+        $this->pokedex = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,14 +122,71 @@ class Game
         return $this;
     }
 
-    public function getPokedex(): ?Pokedex
+    public function getReleaseDate(): ?\DateTimeImmutable
+    {
+        return $this->releaseDate;
+    }
+
+    public function setReleaseDate(?\DateTimeImmutable $releaseDate): self
+    {
+        $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserPokedex>
+     */
+    public function getUserPokedex(): Collection
+    {
+        return $this->userPokedex;
+    }
+
+    public function addUserPokedex(UserPokedex $userPokedex): self
+    {
+        if (!$this->userPokedex->contains($userPokedex)) {
+            $this->userPokedex->add($userPokedex);
+            $userPokedex->setBaseGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPokedex(UserPokedex $userPokedex): self
+    {
+        if ($this->userPokedex->removeElement($userPokedex)) {
+            // set the owning side to null (unless already changed)
+            if ($userPokedex->getBaseGame() === $this) {
+                $userPokedex->setBaseGame(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pokedex>
+     */
+    public function getPokedex(): Collection
     {
         return $this->pokedex;
     }
 
-    public function setPokedex(?Pokedex $pokedex): self
+    public function addPokedex(Pokedex $pokedex): self
     {
-        $this->pokedex = $pokedex;
+        if (!$this->pokedex->contains($pokedex)) {
+            $this->pokedex->add($pokedex);
+            $pokedex->addGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokedex(Pokedex $pokedex): self
+    {
+        if ($this->pokedex->removeElement($pokedex)) {
+            $pokedex->removeGame($this);
+        }
 
         return $this;
     }

@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Game;
 use App\Entity\Pokedex;
 use App\Entity\UserPokedex;
+use App\Repository\GameRepository;
 use App\Repository\PokedexRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -20,8 +22,20 @@ class UserPokedexType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
             ])
+            ->add('baseGame', EntityType::class, [
+                'label' => 'Jeu de base',
+                'class' => Game::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'query_builder' => function (GameRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.isOnline = :val')
+                        ->setParameter('val', true)
+                        ;
+                },
+            ])
             ->add('pokedex', EntityType::class, [
-                'label' => 'Jeu(x)/Génération',
+                'label' => 'Pokédex',
                 'class' => Pokedex::class,
                 'choice_label' => 'name',
                 'query_builder' => function (PokedexRepository $er) {

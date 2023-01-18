@@ -20,23 +20,7 @@ class HisuiFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $time = new \DateTimeImmutable();
-        $game = (new Game())
-            ->setName('Légendes : Arceus')
-            ->setIsOnline(true)
-            ->setCreatedAt($time)
-            ->setUpdatedAt($time)
-        ;
-        $manager->persist($game);
-
-        $pokedex = (new Pokedex())
-            ->setName('Hisui')
-            ->setIsOnline(true)
-            ->setCreatedAt($time)
-            ->setUpdatedAt($time)
-            ->setIsRegional(true)
-            ->setIsShinyUnavailable(false)
-        ;
-        $manager->persist($pokedex);
+        $pokedex = $this->pokedexRepository->findOneBy(['name' => 'Hisui de Légendes : Arceus']);
 
         $fileHandle = fopen("var/hisui.csv", "r");
         while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
@@ -54,13 +38,5 @@ class HisuiFixtures extends Fixture
             $manager->persist($pokemon);
         }
         $manager->flush();
-    }
-
-    public function getDependencies(): array
-    {
-        return [
-            AppFixtures::class,
-            PaldeaFixtures::class,
-        ];
     }
 }

@@ -39,6 +39,18 @@ class PokedexRepository extends ServiceEntityRepository
         }
     }
 
+    public function findWithGameId(int $id): array
+    {
+        return $this->createQueryBuilder('pokedex')
+            ->select('pokedex.id, pokedex.name')
+            ->andWhere('game.id = :id')
+            ->leftJoin('pokedex.games', 'game')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Pokedex[] Returns an array of Pokedex objects
 //     */

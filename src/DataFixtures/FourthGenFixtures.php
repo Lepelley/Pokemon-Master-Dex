@@ -14,20 +14,13 @@ class FourthGenFixtures extends Fixture
 {
     public function __construct(
         private readonly PokemonRepository $pokemonRepository,
+        private readonly PokedexRepository $pokedexRepository,
     ) {}
 
     public function load(ObjectManager $manager)
     {
         $time = new \DateTimeImmutable();
-        $pokedex = (new Pokedex())
-            ->setName('National de Quatrième génération')
-            ->setIsOnline(true)
-            ->setCreatedAt($time)
-            ->setUpdatedAt($time)
-            ->setIsRegional(false)
-            ->setIsShinyUnavailable(false)
-        ;
-        $manager->persist($pokedex);
+        $pokedex = $this->pokedexRepository->findOneBy(['name' => 'National 4G']);
 
         $poke = $this->pokemonRepository->findNationalBefore(494);
         foreach ($poke as $p) {
@@ -41,14 +34,5 @@ class FourthGenFixtures extends Fixture
             $manager->persist($pokemon);
         }
         $manager->flush();
-    }
-
-    public function getDependencies(): array
-    {
-        return [
-            AppFixtures::class,
-            PaldeaFixtures::class,
-            HisuiFixtures::class,
-        ];
     }
 }

@@ -17,3 +17,31 @@
     <input type="submit" value="Créer" class="btn btn-success" />
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('#user_pokedex_baseGame').addEventListener('change', async (e) => {
+          const form = new FormData()
+          form.append('id', e.target.value)
+
+          const response = await fetch('{{ path('app_api_pokedex_filter') }}', {
+            method: 'POST',
+            body: form
+          })
+
+          const result = await response.json()
+          console.log(result)
+          const select = document.querySelector('#user_pokedex_pokedex')
+          while (select.options.length > 0) {
+            select.options[0].remove()
+          }
+
+          result.forEach(r => {
+            const option = new Option(r.name, r.id)
+            select.appendChild(option)
+          })
+        })
+      })
+    </script>
+{% endblock %}
