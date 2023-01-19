@@ -8,26 +8,26 @@
 - [x] Isolarmure 
 - [x] Galar (Epée & Bouclier)
 - [x] Let's Go Pikachu & Evoli
-- [ ] Ultra-Soleil et Ultra-Lune
-- [ ] Alola (Soleil & Lune)
-- [ ] Rubis Oméga & Saphir Alpha
-- [ ] Kalos (X & Y)
-- [ ] Noir 2 & Blanc 2
-- [ ] Unys (Noir & Blanc)
-- [ ] HeartGold & SoulSilver
-- [ ] Platine
-- [ ] XD : Le Souffle des Ténèbres
-- [ ] Émeraude
-- [ ] Rouge Feu & Vert Feuille
+- [x] Ultra-Soleil et Ultra-Lune
+- [x] Alola (Soleil & Lune)
+- [x] Rubis Oméga & Saphir Alpha
+- [x] Kalos (X & Y)
+- [x] Noir 2 & Blanc 2
+- [x] Unys (Noir & Blanc)
+- [x] HeartGold & SoulSilver
+- [x] Platine
+- [x] XD : Le Souffle des Ténèbres
+- [x] Émeraude
+- [x] Rouge Feu & Vert Feuille
 - [ ] Colosseum
 - [ ] Hoenn (Rubis & Saphir)
 - [ ] Cristal
 - [ ] Johto (Or & Argent)
 - [ ] Kanto (RVBJ)
-- [ ] National 7G
-- [ ] National 6G
-- [ ] National 5G
+- [x] National 7G
+- [x] National 6G
+- [x] National 5G
 - [x] National 4G
-- [ ] National 3G
-- [ ] National 2G
-- [ ] National 1G
+- [x] National 3G
+- [x] National 2G
+- [x] National 1G

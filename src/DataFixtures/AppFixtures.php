@@ -85,7 +85,7 @@ class AppFixtures extends Fixture
         $array = [
             ['National 1G', false, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille', "Let's Go Pikachu", "Let's Go Évoli"]],
             ['National 2G', false, ['Or', 'Argent', 'Cristal', "HeartGold", "SoulSilver"]],
-            ['National 3G', false, ['Rubis', 'Saphir', "Rubis Oméga", "Saphir Alpha"]],
+            ['National 3G', false, ['Rubis', 'Saphir', "Émeraude", "Rubis Oméga", "Saphir Alpha"]],
             ['National 4G', false, ['Diamant', 'Perle', "Platine", "Diamant Étincelant", "Perle Scintillante"]],
             ['National 5G', false, ['Noir', 'Blanc', "Noir 2", "Blanc 2"]],
             ['National 6G', false, ['X', 'Y']],
@@ -93,16 +93,17 @@ class AppFixtures extends Fixture
             ['HOME', false, ['HOME']],
             ['Kanto', true, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille']],
             ['Johto', true, ['Or', 'Argent', 'Cristal']],
-            ['Hoenn', true, ['Rubis', 'Saphir']],
+            ['Hoenn', true, ['Rubis', 'Saphir', "Émeraude"]],
             ['Rhodes de Colosseum', true, ['Colosseum']],
-            ["Hoenn d'Émeraude", true, ["Émeraude"]],
             ['Rhodes de XD : Le Souffle des Ténèbres', true, ['XD : Le Souffle des Ténèbres']],
             ['Sinnoh', true, ['Diamant', 'Perle']],
             ['Sinnoh de Platine', true, ['Platine']],
             ['Johto de HeartGold & SoulSilver', true, ['HeartGold', 'SoulSilver']],
             ['Unys', true, ['Noir', 'Blanc']],
             ['Unys de Noir 2 & Blanc 2', true, ["Noir 2", "Blanc 2"]],
-            ['Kalos', true, ['X', 'Y']],
+            ['Kalos : centre', true, ['X', 'Y']],
+            ['Kalos : côte', true, ['X', 'Y']],
+            ['Kalos : monts', true, ['X', 'Y']],
             ['Hoenn de Rubis Oméga & Saphir Alpha', true, ["Rubis Oméga", "Saphir Alpha"]],
             ['Alola', true, ['Soleil', 'Lune']],
             ['Alola de Ultra-Soleil & Ultra-Lune', true, ["Ultra-Soleil", "Ultra-Lune"]],
@@ -142,7 +143,7 @@ class AppFixtures extends Fixture
         $manager->persist($trainer);
 
         $poke = [];
-        $fileHandle = fopen("var/pokemon.csv", "r");
+        $fileHandle = fopen("var/csv/pokemon.csv", "r");
         while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
             $pokemon = (new Pokemon())
                 ->setName($row[1])
