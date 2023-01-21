@@ -27,6 +27,14 @@ class PokemonType extends AbstractType
                 'label' => 'En ligne',
                 'required' => false,
             ])
+            ->add('image', CheckboxType::class, [
+                'label' => 'Image / Classe CSS pour le sprite',
+                'required' => false,
+            ])
+            ->add('imageShiny', CheckboxType::class, [
+                'label' => 'Image / Classe CSS pour le sprite shiny',
+                'required' => false,
+            ])
         ;
     }
 

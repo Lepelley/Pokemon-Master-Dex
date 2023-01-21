@@ -31,6 +31,12 @@ class Pokemon
     #[ORM\Column(nullable: true)]
     private ?int $nationalNumber = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageShiny = null;
+
     public function __construct()
     {
         $this->pokedexEntries = new ArrayCollection();
@@ -97,9 +103,37 @@ class Pokemon
 
     public function spriteNumber(): ?string
     {
+        if ($this->image) {
+            return $this->getImage();
+        }
+
         if ($this->nationalNumber >= 906) {
             return $this->nationalNumber + 1000 . " game-family-scarlet_violet";
         }
         return str_pad($this->nationalNumber, 3, '0', STR_PAD_LEFT) . " game-family-home";
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageShiny(): ?string
+    {
+        return $this->imageShiny;
+    }
+
+    public function setImageShiny(?string $imageShiny): self
+    {
+        $this->imageShiny = $imageShiny;
+
+        return $this;
     }
 }
