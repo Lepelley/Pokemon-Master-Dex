@@ -12,7 +12,7 @@
             <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Administration</a></li>
             <li class="breadcrumb-item"><a href="{{ path('app_admin_pokedex_list') }}">Pokédex</a></li>
             <li class="breadcrumb-item">
-                <a href="{{ path('app_admin_pokedex_list') }}">{{ pokedex.name }}</a>
+                <a href="{{ path('app_admin_pokedex_pokemon_create', {id: pokedex.id}) }}">{{ pokedex.name }}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
                 Ajouter un Pokémon au Pokédex {{ pokedex.name }}

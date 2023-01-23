@@ -21,7 +21,7 @@ class BallType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
             ])
-            ->add('image', UrlType::class, [
+            ->add('image', TextType::class, [
                 'label' => 'Image',
                 'required' => false,
             ])
