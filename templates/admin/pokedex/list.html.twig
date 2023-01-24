@@ -43,6 +43,9 @@
                     <a href="{{ path('app_admin_pokedex_edit', {id: dex.id}) }}" class="btn btn-primary">
                         Modifier <i class="bi bi-pencil-fill"></i>
                     </a>
+                    <a href="{{ path('app_admin_pokedex_copy', {id: dex.id}) }}" class="btn btn-secondary">
+                        Dupliquer <i class="bi bi-clipboard-plus"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
