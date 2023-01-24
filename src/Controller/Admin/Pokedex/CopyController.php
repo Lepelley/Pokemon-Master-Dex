@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Pokedex;
 
 use App\Entity\Pokedex;
+use App\Entity\PokedexPokemon;
 use App\Repository\PokedexRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +35,19 @@ class CopyController extends AbstractController
         }
 
         foreach ($pokedex->getPokemon() as $pokemon) {
-            $pokedexCopy->addPokemon($pokemon);
+            $pokemonCopy = (new PokedexPokemon())
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+                ->setIsShinyUnavailable($pokemon->isShinyUnavailable())
+                ->setPokedex($pokedexCopy)
+                ->setPokemon($pokemon->getPokemon())
+                ->setRegionalNumber($pokemon->getRegionalNumber())
+                ->setSpecificImage($pokemon->getSpecificImage())
+                ->setSpecificName($pokemon->getSpecificName())
+                ->setSpecificShinyImage($pokemon->getSpecificShinyImage())
+            ;
+            $pokedexCopy->addPokemon($pokemonCopy);
+            $this->entityManager->persist($pokemonCopy);
         }
 
         $this->entityManager->persist($pokedexCopy);
