@@ -54,7 +54,7 @@
                     <br>
 
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
-                        <i class="bi bi-question-circle"></i>
+                        <img src="{{ asset('images/XYLoadingMS.png') }}" alt="Inconnu">
                     {% else %}
                         <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
                             pkicon-{{ pokemon.pokemon.pokemon.spriteNumber}}"></i><br>

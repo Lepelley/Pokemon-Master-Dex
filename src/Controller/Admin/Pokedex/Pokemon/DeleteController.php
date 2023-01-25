@@ -3,6 +3,8 @@
 namespace App\Controller\Admin\Pokedex\Pokemon;
 
 use App\Entity\PokedexPokemon;
+use App\Entity\UserPokedexPokemon;
+use App\Repository\UserPokedexRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,7 @@ class DeleteController extends AbstractController
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly UserPokedexRepository $userPokedexRepository,
     ){}
 
     public function __invoke(Request $request, PokedexPokemon $pokemon): Response
@@ -26,6 +29,7 @@ class DeleteController extends AbstractController
             return $this->redirectToRoute('app_admin_pokedex_edit', ['id' => $pokemon->getPokedex()->getId()]);
         }
 
+        $this->removeOldPokemonToUserDex($pokemon);
         $this->entityManager->remove($pokemon);
         $pokedex = $pokemon->getPokedex();
         $pokedex->removePokemon($pokemon);
@@ -38,5 +42,17 @@ class DeleteController extends AbstractController
         );
 
         return $this->redirectToRoute('app_admin_pokedex_edit', ['id' => $pokemon->getPokedex()->getId()]);
+    }
+
+    private function removeOldPokemonToUserDex (PokedexPokemon $pokedexPokemon) {
+        foreach ($this->userPokedexRepository->findBy(['pokedex_id' => $pokedexPokemon->getPokedex()]) as $pokedex) {
+
+            foreach ($pokedex->getPokemon() as $pokemon) {
+                if ($pokemon->getPokemon() === $pokedexPokemon) {
+                    $pokedex->removePokemon($pokemon);
+                }
+            }
+            $this->entityManager->persist($pokedex);
+        }
     }
 }
