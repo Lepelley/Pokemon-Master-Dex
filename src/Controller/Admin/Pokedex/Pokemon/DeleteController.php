@@ -45,7 +45,7 @@ class DeleteController extends AbstractController
     }
 
     private function removeOldPokemonToUserDex (PokedexPokemon $pokedexPokemon) {
-        foreach ($this->userPokedexRepository->findBy(['pokedex_id' => $pokedexPokemon->getPokedex()]) as $pokedex) {
+        foreach ($this->userPokedexRepository->findBy(['pokedex' => $pokedexPokemon->getPokedex()]) as $pokedex) {
 
             foreach ($pokedex->getPokemon() as $pokemon) {
                 if ($pokemon->getPokemon() === $pokedexPokemon) {

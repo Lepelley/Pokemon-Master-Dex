@@ -51,7 +51,7 @@ class CreateController extends AbstractController
     private function addNewPokemonToUserDex(PokedexPokemon $pokedexPokemon): void
     {
         $time = new \DateTimeImmutable();
-        foreach ($this->userPokedexRepository->findBy(['pokedex_id' => $pokedexPokemon->getPokedex()]) as $pokedex) {
+        foreach ($this->userPokedexRepository->findBy(['pokedex' => $pokedexPokemon->getPokedex()]) as $pokedex) {
             $pokemon = (new UserPokedexPokemon())
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
