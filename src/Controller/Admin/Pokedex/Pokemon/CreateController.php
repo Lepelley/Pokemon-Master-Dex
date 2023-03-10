@@ -35,7 +35,6 @@ class CreateController extends AbstractController
                 ->setCreatedAt($time)
                 ->setUpdatedAt($time)
             ;
-            $this->addNewPokemonToUserDex($pokemon);
             $this->entityManager->persist($pokemon);
             $this->entityManager->flush();
 
@@ -46,21 +45,5 @@ class CreateController extends AbstractController
             'form' => $form->createView(),
             'pokedex' => $pokedex,
         ]);
-    }
-
-    private function addNewPokemonToUserDex(PokedexPokemon $pokedexPokemon): void
-    {
-        $time = new \DateTimeImmutable();
-        foreach ($this->userPokedexRepository->findBy(['pokedex' => $pokedexPokemon->getPokedex()]) as $pokedex) {
-            $pokemon = (new UserPokedexPokemon())
-                ->setCreatedAt($time)
-                ->setUpdatedAt($time)
-                ->setPokemon($pokedexPokemon)
-                ->setPokedex($pokedex)
-                ->setIsCaptured(false)
-            ;
-            $this->entityManager->persist($pokemon);
-            $this->entityManager->persist($pokedex);
-        }
     }
 }
