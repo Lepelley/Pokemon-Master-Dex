@@ -5,13 +5,13 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\OnlineTrait;
 use App\Entity\Trait\UpdatedAtTrait;
-use App\Repository\PokemonRepository;
+use App\Repository\PokemonFormRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PokemonRepository::class)]
-class Pokemon
+#[ORM\Entity(repositoryClass: PokemonFormRepository::class)]
+class PokemonForm
 {
     use OnlineTrait;
     use CreatedAtTrait;
@@ -22,14 +22,11 @@ class Pokemon
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: PokedexPokemon::class, orphanRemoval: true)]
     private Collection $pokedexEntries;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $nationalNumber = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
@@ -37,13 +34,20 @@ class Pokemon
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageShiny = null;
 
-    #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: PokemonForm::class, orphanRemoval: true)]
-    private Collection $forms;
+    #[ORM\ManyToOne(inversedBy: 'forms')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Pokemon $pokemon = null;
+
+    #[ORM\Column]
+    private ?bool $isGenderDifference = null;
+
+    #[ORM\ManyToMany(targetEntity: Pokedex::class, mappedBy: 'pokemonForms')]
+    private Collection $pokedex;
 
     public function __construct()
     {
         $this->pokedexEntries = new ArrayCollection();
-        $this->forms = new ArrayCollection();
+        $this->pokedex = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,30 +97,6 @@ class Pokemon
         return $this;
     }
 
-    public function getNationalNumber(): ?int
-    {
-        return $this->nationalNumber;
-    }
-
-    public function setNationalNumber(?int $nationalNumber): self
-    {
-        $this->nationalNumber = $nationalNumber;
-
-        return $this;
-    }
-
-    public function spriteNumber(): ?string
-    {
-        if ($this->image) {
-            return $this->getImage();
-        }
-
-        if ($this->nationalNumber >= 906) {
-            return $this->nationalNumber + 1000 . " game-family-scarlet_violet";
-        }
-        return str_pad($this->nationalNumber, 3, '0', STR_PAD_LEFT) . " game-family-home";
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -141,31 +121,52 @@ class Pokemon
         return $this;
     }
 
-    /**
-     * @return Collection<int, PokemonForm>
-     */
-    public function getForms(): Collection
+    public function getPokemon(): ?Pokemon
     {
-        return $this->forms;
+        return $this->pokemon;
     }
 
-    public function addForm(PokemonForm $form): self
+    public function setPokemon(?Pokemon $pokemon): self
     {
-        if (!$this->forms->contains($form)) {
-            $this->forms->add($form);
-            $form->setPokemon($this);
+        $this->pokemon = $pokemon;
+
+        return $this;
+    }
+
+    public function isIsGenderDifference(): ?bool
+    {
+        return $this->isGenderDifference;
+    }
+
+    public function setIsGenderDifference(bool $isGenderDifference): self
+    {
+        $this->isGenderDifference = $isGenderDifference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pokedex>
+     */
+    public function getPokedex(): Collection
+    {
+        return $this->pokedex;
+    }
+
+    public function addPokedex(Pokedex $pokedex): self
+    {
+        if (!$this->pokedex->contains($pokedex)) {
+            $this->pokedex->add($pokedex);
+            $pokedex->addPokemonForm($this);
         }
 
         return $this;
     }
 
-    public function removeForm(PokemonForm $form): self
+    public function removePokedex(Pokedex $pokedex): self
     {
-        if ($this->forms->removeElement($form)) {
-            // set the owning side to null (unless already changed)
-            if ($form->getPokemon() === $this) {
-                $form->setPokemon(null);
-            }
+        if ($this->pokedex->removeElement($pokedex)) {
+            $pokedex->removePokemonForm($this);
         }
 
         return $this;

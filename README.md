@@ -1,6 +1,10 @@
 # TODO
 - logo du jeu
 
+- specific name à afficher partout 
+
+- pouvoir lier des jeux à un pokédex
+
 - cards pour afficher les dex sur la Home en connecté
 
 - profil utilisateur

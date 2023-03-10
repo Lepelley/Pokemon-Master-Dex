@@ -1,0 +1,55 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ parent()}} &raquo; Forme de Pokémon {% endblock %}
+
+{% block body %}
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Administration</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Forme de Pokémon</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <h1 class="col-10">Forme de Pokémon</h1>
+        <p class="col-2">
+            <a href="{{ path('app_admin_pokemon_form_create') }}" class="btn btn-primary">Ajouter une forme de Pokémon</a>
+        </p>
+    </div>
+
+    <table class="table text-center">
+        <tr>
+            <th>Pokémon</th>
+            <th>Nom de la forme</th>
+            <th>Image</th>
+            <th>Image Shiny</th>
+            <th>En ligne</th>
+            <th>Créé le</th>
+            <th>Mis à jour le</th>
+            <th>Options</th>
+        </tr>
+        <tbody>
+        {% for poke in pokemon %}
+            <tr>
+                <td>{{ poke.pokemon.name }}</td>
+                <td>{{ poke.name? poke.name : poke.pokemon.name ~ ' mâle/femelle' }}</td>
+                <td>
+                    <span><i class="pkicon pkicon-{{ poke.image ? poke.image : poke.pokemon.spriteNumber }}"></i></span>
+                <td>
+                    <span><i class="pkicon color-shiny pkicon-{{ poke.image ? poke.image : poke.pokemon.spriteNumber}}"></i></span>
+                </td>
+                <td>{{ poke.isOnline ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
+                <td>{{ poke.createdAt | date('d/m/y H:i') }}</td>
+                <td>{{ poke.updatedAt | date('d/m/y H:i') }}</td>
+                <td>
+                    <a href="{{ path('app_admin_pokemon_form_edit', {id: poke.id}) }}" class="btn btn-primary">
+                        Modifier <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

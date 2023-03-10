@@ -25,6 +25,10 @@
         <a href="{{ path('app_admin_pokedex_pokemon_create', {id: pokedex.id}) }}" class="btn btn-primary">
             Ajouter <i class="bi bi-plus-circle"></i>
         </a>
+
+        <a href="{{ path('app_admin_pokedex_form_edit', {id: pokedex.id}) }}" class="btn btn-secondary">
+            Modifier les formes <i class="bi bi-plus-pencil"></i>
+        </a>
     </h2>
     <table class="table table-striped">
         <tr>
@@ -49,7 +53,7 @@
                         </button>
                     </form>
                 </td>
-                <td>{{ pokemon.pokemon.specificName ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }}
+                <td>{{ pokemon.specificName ? pokemon.specificName : pokemon.pokemon.pokemon.name }}
                 </td>
                 <td>{{ pokemon.regionalNumber }}</td>
                 <td>{{ pokemon.pokemon.nationalNumber }}</td>

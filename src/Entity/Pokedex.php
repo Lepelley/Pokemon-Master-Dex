@@ -40,11 +40,15 @@ class Pokedex
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'pokedex')]
     private Collection $games;
 
+    #[ORM\ManyToMany(targetEntity: PokemonForm::class, inversedBy: 'pokedex')]
+    private Collection $pokemonForms;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
         $this->allUsersPokedex = new ArrayCollection();
         $this->games = new ArrayCollection();
+        $this->pokemonForms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,6 +172,30 @@ class Pokedex
     public function removeGame(Game $game): self
     {
         $this->games->removeElement($game);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PokemonForm>
+     */
+    public function getPokemonForms(): Collection
+    {
+        return $this->pokemonForms;
+    }
+
+    public function addPokemonForm(PokemonForm $pokemonForm): self
+    {
+        if (!$this->pokemonForms->contains($pokemonForm)) {
+            $this->pokemonForms->add($pokemonForm);
+        }
+
+        return $this;
+    }
+
+    public function removePokemonForm(PokemonForm $pokemonForm): self
+    {
+        $this->pokemonForms->removeElement($pokemonForm);
 
         return $this;
     }
