@@ -53,7 +53,7 @@
                         </button>
                     </form>
                 </td>
-                <td>{{ pokemon.specificName ? pokemon.specificName : pokemon.pokemon.pokemon.name }}
+                <td>{{ not pokemon.specificName == '' ? pokemon.specificName : pokemon.pokemon.pokemon.name }}
                 </td>
                 <td>{{ pokemon.regionalNumber }}</td>
                 <td>{{ pokemon.pokemon.nationalNumber }}</td>
