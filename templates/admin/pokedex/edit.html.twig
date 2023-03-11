@@ -53,7 +53,12 @@
                         </button>
                     </form>
                 </td>
-                <td>{{ pokemon.specificName <> '' ? pokemon.specificName : pokemon.pokemon.pokemon.name }}
+                <td>
+                    {% if not pokemon.specificName == '' %}
+                        {{ pokemon.specificName }}
+                    {% else %}
+                        {{  pokemon.pokemon.pokemon.name }}
+                    {% endif %}
                 </td>
                 <td>{{ pokemon.regionalNumber }}</td>
                 <td>{{ pokemon.pokemon.nationalNumber }}</td>
