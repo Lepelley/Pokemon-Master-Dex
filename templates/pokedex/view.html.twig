@@ -48,7 +48,7 @@
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
                         ???
                     {% else %}
-                        {{ not pokemon.pokemon.specificName == '' ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }}
+                        {{ pokemon.pokemon.specificName <> '' ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }}
                     {% endif %}
 
                     <br>
