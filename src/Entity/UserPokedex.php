@@ -183,7 +183,10 @@ class UserPokedex
 
             $total = 0;
             foreach ($this->getPokemon() as $pokemon) {
-                if (false === $pokemon->getPokemon()->isShinyUnavailable()) {
+                if ($pokemon->getPokemon() && false === $pokemon->getPokemon()->isShinyUnavailable()) {
+                    $total++;
+                }
+                if ($pokemon->getForm()) {
                     $total++;
                 }
             }
