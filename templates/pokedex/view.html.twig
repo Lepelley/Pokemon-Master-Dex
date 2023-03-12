@@ -38,7 +38,7 @@
         <div class="pokedex-view">
         {% for pokemon in pokedex.pokemon %}
             <div class="pokedex-view__pokemon flex-fill
-                {{ (pokedex.isShiny and pokemon.pokemon.isShinyUnavailable)
+                {{ (pokedex.isShiny and (pokemon.pokemon and pokemon.pokemon.isShinyUnavailable))
                     ? 'bg-secondary'
                     : pokemon.isCaptured ? "bg-primary js-captured" }}"
             >
