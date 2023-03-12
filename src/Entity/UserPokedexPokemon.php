@@ -36,8 +36,13 @@ class UserPokedexPokemon
     private ?UserPokedex $pokedex = null;
 
     #[ORM\ManyToOne(inversedBy: 'usersPokemon')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?PokedexPokemon $pokemon = null;
+
+    #[ORM\ManyToOne(inversedBy: 'userPokemon')]
+    private ?PokemonForm $form = null;
+
+    #[ORM\Column]
+    private ?bool $isMale = null;
 
     public function getId(): ?int
     {
@@ -112,6 +117,30 @@ class UserPokedexPokemon
     public function setPokemon(?PokedexPokemon $pokemon): self
     {
         $this->pokemon = $pokemon;
+
+        return $this;
+    }
+
+    public function getForm(): ?PokemonForm
+    {
+        return $this->form;
+    }
+
+    public function setForm(?PokemonForm $form): self
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    public function isMale(): ?bool
+    {
+        return $this->isMale;
+    }
+
+    public function setIsMale(bool $isMale): self
+    {
+        $this->isMale = $isMale;
 
         return $this;
     }

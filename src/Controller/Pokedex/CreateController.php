@@ -3,10 +3,10 @@
 namespace App\Controller\Pokedex;
 
 use App\Entity\PokedexPokemon;
+use App\Entity\PokemonForm;
 use App\Entity\UserPokedex;
 use App\Entity\UserPokedexPokemon;
 use App\Form\UserPokedexType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,80 +56,39 @@ class CreateController extends AbstractController
         ]);
     }
 
-    private function createEntriesForPokedex(UserPokedex $pokedex, \DateTimeImmutable $time): void
+    private function createEntriesForPokedex(UserPokedex $pokedex): void
     {
         foreach ($pokedex->getPokedex()->getPokemon() as $pokemon) {
-            $entry = (new UserPokedexPokemon())
-                ->setPokedex($pokedex)
-                ->setPokemon($pokemon)
-                ->setIsCaptured(false)
-                ->setCreatedAt($time)
-                ->setUpdatedAt($time)
-            ;
+            $entry = $this->createUserPokedexPokemon($pokedex, $pokemon);
             $this->entityManager->persist($entry);
         }
 
         foreach ($pokedex->getPokedex()->getPokemonForms() as $form) {
             if ($form->isIsGenderDifference()) {
-                $male = (new PokedexPokemon())
-                    ->setPokedex($pokedex->getPokedex())
-                    ->setPokemon($form->getPokemon())
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                    ->setSpecificName($form->getPokemon()->getName() . ' mâle')
-                    ->setIsShinyUnavailable(false)
-                ;
-                $entry = (new UserPokedexPokemon())
-                    ->setPokedex($pokedex)
-                    ->setPokemon($male)
-                    ->setIsCaptured(false)
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                ;
-                $female = (new PokedexPokemon())
-                    ->setPokedex($pokedex->getPokedex())
-                    ->setPokemon($form->getPokemon())
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                    ->setSpecificName($form->getPokemon()->getName() . ' femelle')
-                    ->setSpecificImage($form->getImage())
-                    ->setSpecificShinyImage($form->getImageShiny())
-                    ->setIsShinyUnavailable(false)
-                ;
-                $entry2 = (new UserPokedexPokemon())
-                    ->setPokedex($pokedex)
-                    ->setPokemon($female)
-                    ->setIsCaptured(false)
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                ;
+                $entry = $this->createUserPokedexPokemon($pokedex, null, $form, true);
                 $this->entityManager->persist($entry);
+
+                $entry2 = $this->createUserPokedexPokemon($pokedex, null, $form, false);
                 $this->entityManager->persist($entry2);
-                $this->entityManager->persist($male);
-                $this->entityManager->persist($female);
             } else {
-                $pokemon = (new PokedexPokemon())
-                    ->setPokedex($pokedex->getPokedex())
-                    ->setPokemon($form->getPokemon())
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                    ->setSpecificName($form->getName())
-                    ->setSpecificImage($form->getImage())
-                    ->setSpecificShinyImage($form->getImageShiny())
-                    ->setIsShinyUnavailable(false)
-                ;
-                $entry = (new UserPokedexPokemon())
-                    ->setPokedex($pokedex)
-                    ->setPokemon($pokemon)
-                    ->setIsCaptured(false)
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                ;
+                $entry = $this->createUserPokedexPokemon($pokedex, null, $form);
                 $this->entityManager->persist($entry);
-                $this->entityManager->persist($pokemon);
             }
         }
 
         return;
+    }
+
+    private function createUserPokedexPokemon(UserPokedex $pokedex, ?PokedexPokemon $pokemon, ?PokemonForm $form = null, bool $isMale = false) : UserPokedexPokemon
+    {
+        return (new UserPokedexPokemon())
+            ->setPokedex($pokedex)
+            ->setPokemon($pokemon)
+            ->setForm($form)
+            ->setIsMale($isMale)
+            ->setIsCaptured(false)
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setUpdatedAt(new \DateTimeImmutable())
+        ;
     }
 }

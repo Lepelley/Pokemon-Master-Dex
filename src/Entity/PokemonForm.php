@@ -44,10 +44,14 @@ class PokemonForm
     #[ORM\ManyToMany(targetEntity: Pokedex::class, mappedBy: 'pokemonForms')]
     private Collection $pokedex;
 
+    #[ORM\OneToMany(mappedBy: 'form', targetEntity: UserPokedexPokemon::class)]
+    private Collection $userPokemon;
+
     public function __construct()
     {
         $this->pokedexEntries = new ArrayCollection();
         $this->pokedex = new ArrayCollection();
+        $this->userPokemon = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,6 +171,36 @@ class PokemonForm
     {
         if ($this->pokedex->removeElement($pokedex)) {
             $pokedex->removePokemonForm($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserPokedexPokemon>
+     */
+    public function getUserPokemon(): Collection
+    {
+        return $this->userPokemon;
+    }
+
+    public function addUserPokemon(UserPokedexPokemon $userPokemon): self
+    {
+        if (!$this->userPokemon->contains($userPokemon)) {
+            $this->userPokemon->add($userPokemon);
+            $userPokemon->setForm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPokemon(UserPokedexPokemon $userPokemon): self
+    {
+        if ($this->userPokemon->removeElement($userPokemon)) {
+            // set the owning side to null (unless already changed)
+            if ($userPokemon->getForm() === $this) {
+                $userPokemon->setForm(null);
+            }
         }
 
         return $this;
