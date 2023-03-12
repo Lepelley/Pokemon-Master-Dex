@@ -54,7 +54,7 @@
                     </form>
                 </td>
                 <td>
-                    {% if not pokemon.specificName == '' %}
+                    {% if pokemon.specificName is defined %}
                         {{ pokemon.specificName }}
                     {% else %}
                         {{  pokemon.pokemon.pokemon.name }}
