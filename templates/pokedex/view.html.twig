@@ -48,10 +48,10 @@
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
                         ???
                     {% else %}
-                        {% if pokemon.pokemon.specificName is defined %}
+                        {% if not pokemon.pokemon.specificName is null %}
                             {{ pokemon.pokemon.specificName }}
                         {% else %}
-                            {{  pokemon.pokemon.pokemon.pokemon.name }}
+                            {{  pokemon.pokemon.pokemon.name }}
                         {% endif %}
                     {% endif %}
 
