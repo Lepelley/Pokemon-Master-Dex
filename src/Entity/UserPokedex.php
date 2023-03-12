@@ -145,7 +145,8 @@ class UserPokedex
             foreach ($this->pokemon as $pokemon) {
                 if (
                     ($pokemon->isCaptured() && false  === $this->isShiny) ||
-                    $pokemon->isCaptured() && $this->isShiny && false === $pokemon->getPokemon()->isShinyUnavailable()
+                    $pokemon->isCaptured() && $this->isShiny && ($pokemon->getPokemon() && false === $pokemon->getPokemon()->isShinyUnavailable()) ||
+                    $pokemon->isCaptured() && $this->isShiny && $pokemon->getForm()
                 ) {
                     $this->pokemonCaught++;
                 }
