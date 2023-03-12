@@ -42,7 +42,7 @@
                     ? 'bg-secondary'
                     : pokemon.isCaptured ? "bg-primary js-captured" }}"
             >
-                {% if (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable) or pokemon.form) %}
+                {% if (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable) or pokemon.form)) %}
                     <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark pokedex-pokemon">
                 {% endif %}
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
