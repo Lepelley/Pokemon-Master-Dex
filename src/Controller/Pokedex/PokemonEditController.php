@@ -19,7 +19,9 @@ class PokemonEditController extends AbstractController
 
     public function __invoke(Request $request, UserPokedexPokemon $pokemon): Response
     {
-        $form = $this->createForm(UserPokedexPokemonType::class, $pokemon);
+        $form = $this->createForm(UserPokedexPokemonType::class, $pokemon, [
+            'game' => $pokemon->getPokedex()->getBaseGame(),
+        ]);
 
         $form->handleRequest($request);
 
