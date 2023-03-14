@@ -1,6 +1,8 @@
 # TODO
 - logo du jeu
 
+- ajouter shinyUnavailable pour les formes (=>>>> compte des pokémon attrapés shiny sur la home page)
+
 - specific name à afficher partout 
 
 - pouvoir lier des jeux à un pokédex
