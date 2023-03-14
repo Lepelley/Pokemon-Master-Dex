@@ -19,7 +19,7 @@ class PokemonEditController extends AbstractController
 
     public function __invoke(Request $request, UserPokedexPokemon $pokemon): Response
     {
-        if ($this->getUser() !== $pokedex->getTrainer()) {
+        if ($this->getUser() !== $pokemon->getPokedex()->getTrainer()) {
             return $this->redirectToRoute('app_home');
         }
         
