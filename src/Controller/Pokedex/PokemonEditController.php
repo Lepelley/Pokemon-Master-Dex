@@ -19,6 +19,10 @@ class PokemonEditController extends AbstractController
 
     public function __invoke(Request $request, UserPokedexPokemon $pokemon): Response
     {
+        if ($this->getUser() !== $pokedex->getTrainer()) {
+            return $this->redirectToRoute('app_home');
+        }
+        
         $form = $this->createForm(UserPokedexPokemonType::class, $pokemon, [
             'game' => $pokemon->getPokedex()->getBaseGame(),
         ]);
