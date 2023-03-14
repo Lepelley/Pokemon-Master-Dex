@@ -21,7 +21,7 @@ class UserPokedexPokemonType extends AbstractType
             ->add('isCaptured', CheckboxType::class, [
                 'label' => 'Attrapé ?',
                 'required' => false,
-                'attr' => ['selected' => 'selected'],
+                'attr' => ['checked' => 'checked'],
             ])
             ->add('captureGame', EntityType::class, [
                 'label' => 'Capturé sur',
