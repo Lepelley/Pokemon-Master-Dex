@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} &raquo; Profil de {{ user.nickname }}{% endblock %}
+
+{% block body %}
+        <div class="row">
+            <h1 class="col-10">
+                Pokédex de {{ app.user.nickname }}
+                {% if completion != 0 %}
+                    ({{ completion }}% de complétion)
+                {% endif %}
+            </h1>
+            <p class="col-2"><a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex</a></p>
+        </div>
+
+        {% for pokedex in user_pokedex %}
+            <p>
+                <a href="{{ path('app_pokedex_view', {id: pokedex.id}) }}">{{ pokedex.name }}</a>
+                {% if pokedex.shiny %}
+                    <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" style="height: 1rem" />
+                {% endif %}
+                {{ pokedex.pokemonCaught }} / {{ pokedex.pokemonCount }} ({{ pokedex.pokemonCaughtPerCent }}%)
+                <br>
+                <span style="width: 20%;display:inline-block">
+                    <span class="progress" role="progressbar" aria-label="Dex's Progress"
+                         aria-valuenow="{{ pokedex.pokemonCaughtPerCent }}" aria-valuemin="0" aria-valuemax="100">
+                        <span class="progress-bar" style="width: {{ pokedex.pokemonCaughtPerCent }}%"></span>
+                    </span>
+                </span>
+            </p>
+        {% endfor %}
+{% endblock %}

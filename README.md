@@ -3,6 +3,7 @@
 
 - ajouter shinyUnavailable pour les formes (=>>>> compte des pokémon attrapés shiny sur la home page)
 
+- rajouter un champ pour les méthodes de chasses/captures
 - specific name à afficher partout 
 
 - pouvoir lier des jeux à un pokédex
