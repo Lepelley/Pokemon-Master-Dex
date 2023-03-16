@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/pokesprite-v7.css') }}" />
+</head>
+<body style="background: #2e2e2e;overflow: hidden;
+{{ width > 0 ? 'width: ' ~ width ~ 'px;' }}
+    {{ height > 0 ? 'height: ' ~ height ~ 'px;' }}
+        ">
+{% for y in 1..loopFor %}
+        {% for pokemon in pokedex.pokemon %}
+                <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
+                            pkicon-{{ pokemon.form ? pokemon.form.pokemon.spriteNumber : pokemon.pokemon.pokemon.spriteNumber}}"></i>
+        {% endfor %}
+{% endfor %}
+</body>
+</html>
