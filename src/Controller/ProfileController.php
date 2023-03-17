@@ -19,7 +19,7 @@ class ProfileController extends AbstractController
 
     public function __invoke(User $user): Response
     {
-        $pokedex = $this->userPokedexRepository->findWithUser($this->getUser());
+        $pokedex = $this->userPokedexRepository->findWithUser($user);
 
         return $this->render('profile.html.twig', [
             'user' => $user,

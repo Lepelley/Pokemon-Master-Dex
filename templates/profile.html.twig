@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} &raquo; Profil de {{ user.nickname }}{% endblock %}
+{% block title %}{{ parent() }} &raquo; Pokédex de {{ user.nickname }}{% endblock %}
 
 {% block body %}
         <div class="row">
             <h1 class="col-10">
-                Pokédex de {{ app.user.nickname }}
+                Pokédex de {{ user.nickname }}
                 {% if completion != 0 %}
                     ({{ completion }}% de complétion)
                 {% endif %}

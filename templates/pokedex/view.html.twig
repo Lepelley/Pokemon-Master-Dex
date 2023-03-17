@@ -18,9 +18,11 @@
             {% endif %}
             de {{ pokedex.trainer.nickname }}
         </h1>
+        {% if app.user and (app.user.id == pokedex.trainer.id) %}
         <p class="col-2">
             <a href="{{ path('app_pokedex_edit', {id: pokedex.id}) }}" class="btn btn-primary">Modifier mon Pokédex</a>
         </p>
+        {% endif %}
     </div>
 
     <h2 class="text-center">
@@ -42,7 +44,7 @@
                     ? 'bg-secondary'
                     : pokemon.isCaptured ? "bg-primary js-captured" }}"
             >
-                {% if (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable))) %}
+                {% if app.user and (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable))) %}
                     <a href="{{ path('app_pokedex_pokemon_edit', {id: pokemon.id}) }}" class="text-dark pokedex-pokemon">
                 {% endif %}
                     {% if pokedex.preventSpoil and not pokemon.isCaptured %}
@@ -97,7 +99,7 @@
                             {% endif %}
                         </span>
                     </span>
-                    {% if (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable))) %}
+                    {% if app.user and (app.user.id == pokedex.trainer.id) and not (pokedex.isShiny and ((pokemon.pokemon and pokemon.pokemon.isShinyUnavailable))) %}
                         </a>
                     {% endif %}
             </div>
