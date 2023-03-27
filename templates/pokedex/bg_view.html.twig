@@ -8,6 +8,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/pokesprite-v7.css') }}" />
+    <script>
+      setTimeout(() => {
+        document.location.reload();
+      }, 30000);
+
+    </script>
 </head>
 <body style="background: #808080;overflow: hidden;
 {{ width > 0 ? 'width: ' ~ width ~ 'px;' }}
