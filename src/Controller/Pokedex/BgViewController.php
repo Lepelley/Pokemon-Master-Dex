@@ -16,9 +16,9 @@ class BgViewController extends AbstractController
     {
         return $this->render('pokedex/bg_view.html.twig', [
             'pokedex' => $pokedex,
-            'width' => $request->get('width') ?? 0,
-            'height' => $request->get('height') ?? 0,
-            'loopFor' => $request->get('loop_for') ?? 1,
+            'width' => (int) $request->get('width') ?? 0,
+            'height' => (int)$request->get('height') ?? 0,
+            'loopFor' => (int) $request->get('loop_for') ?? 1,
         ]);
     }
 }

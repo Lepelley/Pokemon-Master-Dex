@@ -15,8 +15,12 @@
         ">
 {% for y in 1..loopFor %}
         {% for pokemon in pokedex.pokemon %}
-                <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
-                            pkicon-{{ pokemon.form ? pokemon.form.pokemon.spriteNumber : pokemon.pokemon.pokemon.spriteNumber}}"></i>
+            {% if  not pokemon.isCaptured %}
+                <img src="{{ asset('images/XYLoadingMS.png') }}" alt="Inconnu" style="background: gray">
+            {% else %}
+                    <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
+                                pkicon-{{ pokemon.form ? pokemon.form.pokemon.spriteNumber : pokemon.pokemon.pokemon.spriteNumber}}"></i>
+            {% endif %}
         {% endfor %}
 {% endfor %}
 </body>
