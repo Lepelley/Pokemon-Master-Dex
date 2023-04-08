@@ -72,7 +72,7 @@
                         <img src="{{ asset('images/XYLoadingMS.png') }}" alt="Inconnu" style="background: gray">
                     {% else %}
                         <i class="pkicon {{ pokedex.shiny ? 'color-shiny' }}
-                            pkicon-{{ pokemon.form ? pokemon.form.pokemon.spriteNumber : pokemon.pokemon.pokemon.spriteNumber}}"></i><br>
+                            pkicon-{{ pokemon.form ? pokemon.form.image and not pokemon.isMale ? pokemon.form.image : pokemon.form.pokemon.spriteNumber : pokemon.pokemon.pokemon.spriteNumber}}"></i><br>
                     {% endif %}
 
                     <span class="pokedex-pokemon__infos">

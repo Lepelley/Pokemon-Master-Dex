@@ -1,0 +1,141 @@
+/*.pokedex-pokemon {*/
+/*    display: flex;*/
+/*    vertical-align: center;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.game-family-home {*/
+/*    transform:scale(1.5);*/
+/*}*/
+
+.poke-sprite {
+    /*transform:scale(0.5);*/
+    border: 1px solid white;
+    width: 90px;
+    height: 90px;
+    image-rendering: auto;
+    display: inline-block;
+    background: url("../images/gen_9_sprites___pokemon_scarlet_and_violet_by_kingofthe_x_roads_df0sx1m.png") no-repeat;
+}
+
+.poke-sprite.color-shiny {
+    background: url("../images/gen_9_shiny_pokemon_sprites__wip_by_kingofthe_x_roads_dfi63y0.png") no-repeat;
+}
+
+.poke-sprite.poke-128 {background-position: -5px -592px;}
+.poke-sprite.poke-128.paldean-fire {background-position: -103px -592px;}
+.poke-sprite.poke-128.paldean-water {background-position: -199px -592px;}
+.poke-sprite.poke-194.paldean {background-position: -299px -605px;}
+.poke-sprite.poke-906 {background-position: -2px -17px;}
+.poke-sprite.poke-907 {background-position: -97px -12px;}
+.poke-sprite.poke-908 {background-position: -197px -7px;}
+.poke-sprite.poke-909 {background-position: -295px -10px;}
+.poke-sprite.poke-910 {background-position: -395px -10px;}
+.poke-sprite.poke-911 {background-position: -495px -10px;}
+.poke-sprite.poke-912 {background-position: -586px -10px;}
+.poke-sprite.poke-913 {background-position: -686px -7px;}
+.poke-sprite.poke-914 {background-position: -780px -1px;}
+.poke-sprite.poke-915 {background-position: -880px -17px;}
+.poke-sprite.poke-916 {background-position: -975px -17px;}
+.poke-sprite.poke-916.female {background-position: -1075px -17px;}
+.poke-sprite.poke-917 {background-position: -1168px -12px;}
+.poke-sprite.poke-918 {background-position: -1263px -17px;}
+.poke-sprite.poke-919 {background-position: -1363px -17px;}
+.poke-sprite.poke-920 {background-position: -1463px -17px;}
+.poke-sprite.poke-921 {background-position: -1555px -15px;}
+.poke-sprite.poke-922 {background-position: -1650px -17px;}
+.poke-sprite.poke-923 {background-position: -1752px -10px;}
+.poke-sprite.poke-924 {background-position: -1847px -12px;}
+.poke-sprite.poke-925 {background-position: -100px -107px;}
+.poke-sprite.poke-925.family-3 {background-position: -0px -107px;}
+.poke-sprite.poke-926 {background-position: -195px -115px;}
+.poke-sprite.poke-927 {background-position: -292px -112px;}
+.poke-sprite.poke-928 {background-position: -387px -115px;}
+.poke-sprite.poke-929 {background-position: -481px -111px;}
+.poke-sprite.poke-930 {background-position: -584px -106px;}
+.poke-sprite.poke-931 {background-position: -685px -110px;}
+.poke-sprite.poke-931.blue {background-position: -781px -110px;}
+.poke-sprite.poke-931.yellow {background-position: -877px -110px;}
+.poke-sprite.poke-931.white {background-position: -973px -110px;}
+.poke-sprite.poke-932 {background-position: -1065px -112px;}
+.poke-sprite.poke-933 {background-position: -1167px -118px;}
+.poke-sprite.poke-934 {background-position: -1262px -105px;}
+.poke-sprite.poke-935 {background-position: -1353px -105px;}
+.poke-sprite.poke-936 {background-position: -1453px -103px;}
+.poke-sprite.poke-937 {background-position: -1556px -104px;}
+.poke-sprite.poke-938 {background-position: -1654px -114px;}
+.poke-sprite.poke-939 {background-position: -1749px -110px;}
+.poke-sprite.poke-940 {background-position: -1845px -115px;}
+.poke-sprite.poke-941 {background-position: -10px -207px;}
+.poke-sprite.poke-942 {background-position: -100px -217px;}
+.poke-sprite.poke-943 {background-position: -197px -210px;}
+.poke-sprite.poke-944 {background-position: -290px -215px;}
+.poke-sprite.poke-945 {background-position: -393px -210px;}
+.poke-sprite.poke-946 {background-position: -488px -210px;}
+.poke-sprite.poke-947 {background-position: -583px -210px;}
+.poke-sprite.poke-948 {background-position: -681px -208px;}
+.poke-sprite.poke-949 {background-position: -777px -205px;}
+.poke-sprite.poke-950 {background-position: -876px -210px;}
+.poke-sprite.poke-951 {background-position: -971px -210px;}
+.poke-sprite.poke-952 {background-position: -1071px -205px;}
+.poke-sprite.poke-953 {background-position: -1169px -213px;}
+.poke-sprite.poke-954 {background-position: -1262px -205px;}
+.poke-sprite.poke-955 {background-position: -1360px -215px;}
+.poke-sprite.poke-956 {background-position: -1457px -205px;}
+.poke-sprite.poke-957 {background-position: -1552px -220px;}
+.poke-sprite.poke-958 {background-position: -1652px -217px;}
+.poke-sprite.poke-959 {background-position: -1750px -205px;}
+.poke-sprite.poke-960 {background-position: -1843px -217px;}
+.poke-sprite.poke-961 {background-position: -3px -307px;}
+.poke-sprite.poke-962 {background-position: -100px -297px;}
+.poke-sprite.poke-963 {background-position: -202px -305px;}
+.poke-sprite.poke-964 {background-position: -299px -305px;}
+.poke-sprite.poke-965 {background-position: -493px -312px;}
+.poke-sprite.poke-966 {background-position: -585px -304px;}
+.poke-sprite.poke-967 {background-position: -685px -299px;}
+.poke-sprite.poke-968 {background-position: -775px -310px;}
+.poke-sprite.poke-969 {background-position: -875px -305px;}
+.poke-sprite.poke-970 {background-position: -973px -301px;}
+.poke-sprite.poke-971 {background-position: -1068px -301px;}
+.poke-sprite.poke-972 {background-position: -1170px -300px;}
+.poke-sprite.poke-973 {background-position: -1263px -300px;}
+.poke-sprite.poke-974 {background-position: -1363px -305px;}
+.poke-sprite.poke-975 {background-position: -1461px -303px;}
+.poke-sprite.poke-976 {background-position: -1555px -314px;}
+.poke-sprite.poke-977 {background-position: -1651px -306px;}
+.poke-sprite.poke-978 {background-position: -1746px -307px;}
+.poke-sprite.poke-978.droopy {background-position: -1846px -307px;}
+.poke-sprite.poke-978.stretchy {background-position: -0px -404px;}
+.poke-sprite.poke-979 {background-position: -101px -404px;}
+.poke-sprite.poke-980 {background-position: -203px -408px;}
+.poke-sprite.poke-981 {background-position: -295px -392px;}
+.poke-sprite.poke-982 {background-position: -390px -407px;}
+.poke-sprite.poke-982.tripack {background-position: -490px -407px;}
+.poke-sprite.poke-983 {background-position: -590px -394px;}
+.poke-sprite.poke-984 {background-position: -683px -405px;}
+.poke-sprite.poke-985 {background-position: -783px -410px;}
+.poke-sprite.poke-986 {background-position: -877px -405px;}
+.poke-sprite.poke-987 {background-position: -980px -398px;}
+.poke-sprite.poke-988 {background-position: -1074px -395px;}
+.poke-sprite.poke-989 {background-position: -1167px -393px;}
+.poke-sprite.poke-990 {background-position: -1269px -403px;}
+.poke-sprite.poke-991 {background-position: -1363px -403px;}
+.poke-sprite.poke-992 {background-position: -1460px -400px;}
+.poke-sprite.poke-993 {background-position: -1553px -395px;}
+.poke-sprite.poke-994 {background-position: -1653px -400px;}
+.poke-sprite.poke-995 {background-position: -1753px -395px;}
+.poke-sprite.poke-996 {background-position: -1850px -402px;}
+.poke-sprite.poke-997 {background-position: -0px -497px;}
+.poke-sprite.poke-998 {background-position: -105px -491px;}
+.poke-sprite.poke-999 {background-position: -200px -491px;}
+.poke-sprite.poke-1000 {background-position: -390px -491px;}
+.poke-sprite.poke-1001 {background-position: -490px -496px;}
+.poke-sprite.poke-1002 {background-position: -585px -506px;}
+.poke-sprite.poke-1003 {background-position: -684px -495px;}
+.poke-sprite.poke-1004 {background-position: -780px -500px;}
+.poke-sprite.poke-1005 {background-position: -875px -495px;width: 95px;}
+.poke-sprite.poke-1006 {background-position: -975px -492px;}
+.poke-sprite.poke-1007 {background-position: -1067px -490px;width: 100px;}
+.poke-sprite.poke-1008 {background-position: -1167px -492px;}

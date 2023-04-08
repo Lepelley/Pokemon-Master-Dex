@@ -112,7 +112,7 @@ class Pokemon
         }
 
         if ($this->nationalNumber >= 906) {
-            return $this->nationalNumber + 1000 . " game-family-scarlet_violet";
+            return " poke-sprite poke-" . $this->nationalNumber;
         }
         return str_pad($this->nationalNumber, 3, '0', STR_PAD_LEFT) . " game-family-home";
     }
