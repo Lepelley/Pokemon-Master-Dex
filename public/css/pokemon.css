@@ -12,7 +12,7 @@
 
 .poke-sprite {
     /*transform:scale(0.5);*/
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     width: 90px;
     height: 90px;
     image-rendering: auto;
