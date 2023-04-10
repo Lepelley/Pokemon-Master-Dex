@@ -35,9 +35,9 @@
                 <td>{{ poke.nationalNumber }}</td>
                 <td>{{ poke.name }}</td>
                 <td>
-                    <span><i class="pkicon pkicon-{{ poke.spriteNumber}}"></i></span>
+                    <img src="{{ asset('images/pokemon/' ~ poke.nationalNumber  ~ '.png') }}">
                 <td>
-                    <span><i class="pkicon color-shiny pkicon-{{ poke.spriteNumber}}"></i></span>
+                    <img src="{{ asset('images/pokemon/shiny/' ~ poke.nationalNumber  ~ '.png') }}">
                 </td>
                 <td>{{ poke.isOnline ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
                 <td>{{ poke.createdAt | date('d/m/y H:i') }}</td>

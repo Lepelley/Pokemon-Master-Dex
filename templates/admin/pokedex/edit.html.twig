@@ -63,7 +63,9 @@
                 <td>{{ pokemon.regionalNumber }}</td>
                 <td>{{ pokemon.pokemon.nationalNumber }}</td>
                 <td>
-                    <span><i class="pkicon pkicon-{{ pokemon.pokemon.spriteNumber}}"></i></span>
+                    <span>
+                        <img src="{{ asset('images/pokemon/' ~ pokemon.pokemon.nationalNumber  ~ '.png') }}">
+                    </span>
                 </td>
                 <td>{{ not pokemon.shinyUnavailable ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
             </tr>

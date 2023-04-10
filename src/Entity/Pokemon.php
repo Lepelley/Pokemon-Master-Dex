@@ -105,18 +105,6 @@ class Pokemon
         return $this;
     }
 
-    public function spriteNumber(): ?string
-    {
-        if ($this->image) {
-            return $this->getImage();
-        }
-
-        if ($this->nationalNumber >= 906) {
-            return " poke-sprite poke-" . $this->nationalNumber;
-        }
-        return str_pad($this->nationalNumber, 3, '0', STR_PAD_LEFT) . " game-family-home";
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
