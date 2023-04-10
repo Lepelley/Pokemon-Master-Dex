@@ -35,7 +35,7 @@
                 <td>{{ poke.pokemon.name }}</td>
                 <td>{{ poke.name ? poke.name : poke.pokemon.name ~ ' mâle/femelle' }}</td>
                 <td>
-                    {% set isFemale = not poke.isGenderDifference ? 'female/' %}
+                    {% set isFemale = poke.isGenderDifference ? 'female/' %}
                     {% set image = poke.image and not poke.isGenderDifference ? poke.image : poke.pokemon.nationalNumber %}
                     <img src="{{ asset('images/pokemon/' ~ isFemale ~ image  ~ '.png') }}">
                 <td>
