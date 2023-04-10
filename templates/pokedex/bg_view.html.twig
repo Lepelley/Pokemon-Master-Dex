@@ -27,12 +27,12 @@
 {% for y in 1..loopFor %}
         {% for pokemon in pokedex.pokemon %}
             {% if  not pokemon.isCaptured %}
-                <img src="{{ asset('images/pokemon/0.png') }}" alt="Inconnu">
+                <img src="{{ asset('images/pokemon/0.png') }}" alt="Inconnu" style="width: 32px">
             {% else %}
                 {% set isShiny = pokedex.shiny ? 'shiny/' %}
                 {% set isFemale = pokemon.form and not pokemon.isMale ? 'female/' %}
                 {% set image = pokemon.form ? pokemon.form.image and not pokemon.isMale ? pokemon.form.image : pokemon.form.pokemon.nationalNumber : pokemon.pokemon.pokemon.nationalNumber %}
-                <img src="{{ asset('images/pokemon/' ~ isShiny ~ isFemale ~ image  ~ '.png') }}">
+                <img src="{{ asset('images/pokemon/' ~ isShiny ~ isFemale ~ image  ~ '.png') }}"  style="width: 32px">
             {% endif %}
         {% endfor %}
 {% endfor %}
