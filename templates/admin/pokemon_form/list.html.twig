@@ -33,11 +33,13 @@
         {% for poke in pokemon %}
             <tr>
                 <td>{{ poke.pokemon.name }}</td>
-                <td>{{ poke.name? poke.name : poke.pokemon.name ~ ' mâle/femelle' }}</td>
+                <td>{{ poke.name ? poke.name : poke.pokemon.name ~ ' mâle/femelle' }}</td>
                 <td>
-                    <img src="{{ asset('images/pokemon/' ~ poke.image ? poke.image : poke.pokemon.nationalNumber  ~ '.png') }}">
+                    {% set isFemale = not poke.isGenderDifference ? 'female/' %}
+                    {% set image = poke.image and not poke.isGenderDifference ? poke.image : poke.pokemon.nationalNumber %}
+                    <img src="{{ asset('images/pokemon/' ~ isFemale ~ image  ~ '.png') }}">
                 <td>
-                    <img src="{{ asset('images/pokemon/shiny/' ~ poke.image ? poke.image : poke.pokemon.nationalNumber  ~ '.png') }}">
+                    <img src="{{ asset('images/pokemon/shiny/' ~  isFemale ~ image  ~ '.png') }}">
                 </td>
                 <td>{{ poke.isOnline ? '<i class="bi bi-check-circle"></i>' : '&#10060;' }}</td>
                 <td>{{ poke.createdAt | date('d/m/y H:i') }}</td>
