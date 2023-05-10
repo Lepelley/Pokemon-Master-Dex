@@ -47,6 +47,9 @@ class PokemonForm
     #[ORM\OneToMany(mappedBy: 'form', targetEntity: UserPokedexPokemon::class)]
     private Collection $userPokemon;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $nationalNumber = null;
+
     public function __construct()
     {
         $this->pokedexEntries = new ArrayCollection();
@@ -202,6 +205,18 @@ class PokemonForm
                 $userPokemon->setForm(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNationalNumber(): ?int
+    {
+        return $this->nationalNumber;
+    }
+
+    public function setNationalNumber(?int $nationalNumber): self
+    {
+        $this->nationalNumber = $nationalNumber;
 
         return $this;
     }

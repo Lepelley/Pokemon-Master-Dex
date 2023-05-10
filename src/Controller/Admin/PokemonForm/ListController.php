@@ -13,7 +13,7 @@ class ListController extends AbstractController
     public function __invoke(PokemonFormRepository $repository): Response
     {
         return $this->render('admin/pokemon_form/list.html.twig', [
-            'pokemon' => $repository->findAll(),
+            'pokemon' => $repository->findBy([], ['nationalNumber' => 'ASC']),
         ]);
     }
 }
