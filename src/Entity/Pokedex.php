@@ -40,6 +40,7 @@ class Pokedex
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'pokedex')]
     private Collection $games;
 
+    #[ORM\OrderBy(["nationalNumber" => "ASC"])]
     #[ORM\ManyToMany(targetEntity: PokemonForm::class, inversedBy: 'pokedex')]
     private Collection $pokemonForms;
 
