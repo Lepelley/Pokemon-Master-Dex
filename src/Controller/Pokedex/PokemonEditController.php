@@ -23,9 +23,7 @@ class PokemonEditController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         
-        $form = $this->createForm(UserPokedexPokemonType::class, $pokemon, [
-            'game' => $pokemon->getPokedex()->getBaseGame(),
-        ]);
+        $form = $this->createForm(UserPokedexPokemonType::class, $pokemon);
 
         $form->handleRequest($request);
 

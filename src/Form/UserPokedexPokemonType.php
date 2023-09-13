@@ -37,7 +37,6 @@ class UserPokedexPokemonType extends AbstractType
                     return $ball->getName();
                 },
                 'required' => false,
-//                'expanded' => true,
             ])
             ->add('notes', TextType::class, [
                 'label' => 'Notes',
@@ -48,10 +47,6 @@ class UserPokedexPokemonType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired('game');
-        $resolver->setAllowedTypes('game', Game::class);
-        $resolver->setDefaults([
-            'data_class' => UserPokedexPokemon::class,
-        ]);
+
     }
 }
