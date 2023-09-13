@@ -28,7 +28,6 @@ class UserPokedexPokemonType extends AbstractType
                 'class' => Game::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'empty_data' => (string) $options['game']->getId(),
             ])
             ->add('captureBall', EntityType::class, [
                 'label' => 'Ball',
