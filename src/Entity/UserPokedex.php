@@ -35,6 +35,7 @@ class UserPokedex
     private ?User $trainer = null;
 
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
+    #[ORM\OrderBy(["form" => "ASC"])]
     private Collection $pokemon;
 
     #[ORM\Column]
