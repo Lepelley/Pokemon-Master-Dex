@@ -27,7 +27,7 @@ class UserPokedex
     private ?bool $isShiny = null;
 
     #[ORM\ManyToOne(inversedBy: 'allUsersPokedex')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn]
     private ?Pokedex $pokedex = null;
 
     #[ORM\ManyToOne(inversedBy: 'pokedex')]
