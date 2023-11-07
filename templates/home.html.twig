@@ -4,16 +4,17 @@
 
 {% block body %}
     {% if app.user %}
-        <div class="row">
-            <h1 class="col-8">
-                Pokédex de {{ app.user.nickname }}
-                {% if completion != 0 %}
-                    ({{ completion }}% de complétion)
-                {% endif %}
-            </h1>
-            <p class="col-2"><a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex existant</a></p>
-            <p class="col-2"><a href="{{ path('app_pokedex_create_perso') }}" class="btn btn-success">Créer un nouveau pokédex personnalisé</a></p>
-        </div>
+        <h1>
+            Pokédex de {{ app.user.nickname }}
+            {% if completion != 0 %}
+                ({{ completion }}% de complétion)
+            {% endif %}
+        </h1>
+
+        <p>
+            <a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex existant</a>
+            <a href="{{ path('app_pokedex_create_perso') }}" class="btn btn-success">Créer un nouveau pokédex personnalisé</a>
+        </p>
 
         {% for pokedex in user_pokedex %}
             <p>
@@ -23,9 +24,9 @@
                 {% endif %}
                 {{ pokedex.pokemonCaught }} / {{ pokedex.pokemonCount }} ({{ pokedex.pokemonCaughtPerCent }}%)
                 <br>
-                <span style="width: 20%;display:inline-block">
+                <span style="width: 50%">
                     <span class="progress" role="progressbar" aria-label="Dex's Progress"
-                         aria-valuenow="{{ pokedex.pokemonCaughtPerCent }}" aria-valuemin="0" aria-valuemax="100">
+                         aria-valuenow="{{ pokedex.pokemonCaughtPerCent }}" aria-valuemin="0" aria-valuemax="100"  style="width: 50%">
                         <span class="progress-bar" style="width: {{ pokedex.pokemonCaughtPerCent }}%"></span>
                     </span>
                 </span>
