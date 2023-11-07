@@ -40,9 +40,6 @@ class Pokemon
     #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: PokemonForm::class, orphanRemoval: true)]
     private Collection $forms;
 
-    #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: PokemonEncounter::class, orphanRemoval: true)]
-    private Collection $encounters;
-
     public function __construct()
     {
         $this->pokedexEntries = new ArrayCollection();
@@ -157,36 +154,6 @@ class Pokemon
             // set the owning side to null (unless already changed)
             if ($form->getPokemon() === $this) {
                 $form->setPokemon(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, PokemonEncounter>
-     */
-    public function getEncounters(): Collection
-    {
-        return $this->encounters;
-    }
-
-    public function addEncounter(PokemonEncounter $encounter): self
-    {
-        if (!$this->encounters->contains($encounter)) {
-            $this->encounters->add($encounter);
-            $encounter->setPokemon($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEncounter(PokemonEncounter $encounter): self
-    {
-        if ($this->encounters->removeElement($encounter)) {
-            // set the owning side to null (unless already changed)
-            if ($encounter->getPokemon() === $this) {
-                $encounter->setPokemon(null);
             }
         }
 

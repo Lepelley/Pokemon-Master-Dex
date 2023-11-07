@@ -23,12 +23,9 @@ class PokedexPokemon
     #[ORM\Column(nullable: true)]
     private ?int $regionalNumber = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pokemon')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Pokedex $pokedex = null;
-
     #[ORM\ManyToOne(inversedBy: 'pokedexEntries')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\OrderBy(["nationalNumber" => "ASC"])]
     private ?Pokemon $pokemon = null;
 
     #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
@@ -64,18 +61,6 @@ class PokedexPokemon
     public function setRegionalNumber(?int $regionalNumber): self
     {
         $this->regionalNumber = $regionalNumber;
-
-        return $this;
-    }
-
-    public function getPokedex(): ?Pokedex
-    {
-        return $this->pokedex;
-    }
-
-    public function setPokedex(?Pokedex $pokedex): self
-    {
-        $this->pokedex = $pokedex;
 
         return $this;
     }

@@ -41,7 +41,7 @@ class PokemonEditController extends AbstractController
 
         return $this->render('pokedex/pokemon_edit.html.twig', [
             'form' => $form->createView(),
-            'pokedexId' => $pokemon->getPokedex()->getId(),
+            'pokemon' => $pokemon,
         ]);
     }
 }

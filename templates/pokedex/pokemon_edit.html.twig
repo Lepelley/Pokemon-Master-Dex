@@ -1,14 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} &raquo; Modification de pokémon{% endblock %}
+{% block title %}{{ parent() }} &raquo; Modification de {{ pokemon.pokemon.specificName ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }}{% endblock %}
 
 {% block body %}
     <p>
-        <a href="{{ path('app_pokedex_view', {id: pokedexId}) }}" class="btn btn-primary">Revenir au Pokédex</a>
+        <a href="{{ path('app_pokedex_view', {id: pokemon.pokedex.id}) }}" class="btn btn-primary">Revenir au Pokédex</a>
     </p>
+
+    <h1>Modification de {{ pokemon.pokemon.specificName ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }}</h1>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input type="submit" value="Modifier" class="btn btn-success" />
     {{ form_end(form) }}
+
+
+    <form action="{{ url('app_pokedex_perso_pokemon_delete', {id: pokemon.pokedex.id, pokemon: pokemon.id}) }}" method="post" data-confirmation="true" id="delete-form" style="display: inline">
+        <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+        <button type="submit" class="btn btn-block btn-danger mt-5" style="display: inline-block"
+                onclick="return confirm('Voulez-vous vraiment supprimer {{ pokemon.pokemon.specificName ? pokemon.pokemon.specificName : pokemon.pokemon.pokemon.name }} ?')">
+            Supprimer <i class="bi bi-trash3"></i>
+        </button>
+    </form>
 {% endblock %}

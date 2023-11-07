@@ -11,7 +11,7 @@
     </nav>
 
     <div class="row">
-        <h1 class="col-10">
+        <h1 class="col-8">
             {{ pokedex.name }}
             {% if pokedex.shiny %}
                 <img src="{{ asset('images/shiny.png') }}" alt=" chromatique" />
@@ -19,6 +19,9 @@
             de {{ pokedex.trainer.nickname }}
         </h1>
         {% if app.user and (app.user.id == pokedex.trainer.id) %}
+        <p class="col-2">
+            <a href="{{ path('app_pokedex_perso_pokemon_add', {id: pokedex.id}) }}" class="btn btn-primary">Ajouter un Pokémon</a>
+        </p>
         <p class="col-2">
             <a href="{{ path('app_pokedex_edit', {id: pokedex.id}) }}" class="btn btn-primary">Modifier mon Pokédex</a>
         </p>

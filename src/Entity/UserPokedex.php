@@ -26,17 +26,15 @@ class UserPokedex
     #[ORM\Column]
     private ?bool $isShiny = null;
 
-    #[ORM\ManyToOne(inversedBy: 'allUsersPokedex')]
-    #[ORM\JoinColumn]
-    private ?Pokedex $pokedex = null;
-
     #[ORM\ManyToOne(inversedBy: 'pokedex')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $trainer = null;
 
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
-    #[ORM\OrderBy(["form" => "ASC"])]
+    #[ORM\OrderBy(["form" => "ASC", "pokemon" => "ASC"])]
     private Collection $pokemon;
+
+    private ?Pokedex $pokedex = null;
 
     #[ORM\Column]
     private ?bool $preventSpoil = null;
@@ -92,18 +90,6 @@ class UserPokedex
     public function setIsShiny(bool $isShiny): self
     {
         $this->isShiny = $isShiny;
-
-        return $this;
-    }
-
-    public function getPokedex(): ?Pokedex
-    {
-        return $this->pokedex;
-    }
-
-    public function setPokedex(?Pokedex $pokedex): self
-    {
-        $this->pokedex = $pokedex;
 
         return $this;
     }
@@ -220,5 +206,15 @@ class UserPokedex
         $this->baseGame = $baseGame;
 
         return $this;
+    }
+
+    public function getPokedex(): ?Pokedex
+    {
+        return $this->pokedex;
+    }
+
+    public function setPokedex(?Pokedex $pokedex): void
+    {
+        $this->pokedex = $pokedex;
     }
 }

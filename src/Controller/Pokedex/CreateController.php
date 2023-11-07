@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pokedex;
 
+use App\Entity\Pokedex;
 use App\Entity\PokedexPokemon;
 use App\Entity\PokemonForm;
 use App\Entity\UserPokedex;
@@ -34,21 +35,17 @@ class CreateController extends AbstractController
             /** @var UserPokedex $pokedex */
             $pokedex = $form->getData();
 
-            if ($pokedex->getPokedex()->isShinyUnavailable() && $pokedex->isShiny()) {
-                $this->addFlash('danger', "Ce Pokédex n'est pas disponible en shiny.");
-            } else {
-                $time = new \DateTimeImmutable();
-                $pokedex
-                    ->setTrainer($this->getUser())
-                    ->setCreatedAt($time)
-                    ->setUpdatedAt($time)
-                ;
-                $this->createEntriesForPokedex($pokedex, $time);
-                $this->entityManager->persist($pokedex);
-                $this->entityManager->flush();
+            $time = new \DateTimeImmutable();
+            $pokedex
+                ->setTrainer($this->getUser())
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $this->createEntriesForPokedex($pokedex, $pokedex->getPokedex());
+            $this->entityManager->persist($pokedex);
+            $this->entityManager->flush();
 
-                return $this->redirectToRoute('app_pokedex_view', ['id' => $pokedex->getId()]);
-            }
+            return $this->redirectToRoute('app_pokedex_view', ['id' => $pokedex->getId()]);
         }
 
         return $this->render('pokedex/create.html.twig', [
@@ -56,22 +53,22 @@ class CreateController extends AbstractController
         ]);
     }
 
-    private function createEntriesForPokedex(UserPokedex $pokedex): void
+    private function createEntriesForPokedex(UserPokedex $userPokedex, Pokedex $pokedex): void
     {
-        foreach ($pokedex->getPokedex()->getPokemon() as $pokemon) {
-            $entry = $this->createUserPokedexPokemon($pokedex, $pokemon);
+        foreach ($pokedex->getPokemon() as $pokemon) {
+            $entry = $this->createUserPokedexPokemon($userPokedex, $pokemon);
             $this->entityManager->persist($entry);
         }
 
-        foreach ($pokedex->getPokedex()->getPokemonForms() as $form) {
+        foreach ($pokedex->getPokemonForms() as $form) {
             if ($form->isIsGenderDifference()) {
-                $entry = $this->createUserPokedexPokemon($pokedex, null, $form, true);
+                $entry = $this->createUserPokedexPokemon($userPokedex, null, $form, true);
                 $this->entityManager->persist($entry);
 
-                $entry2 = $this->createUserPokedexPokemon($pokedex, null, $form, false);
+                $entry2 = $this->createUserPokedexPokemon($userPokedex, null, $form, false);
                 $this->entityManager->persist($entry2);
             } else {
-                $entry = $this->createUserPokedexPokemon($pokedex, null, $form);
+                $entry = $this->createUserPokedexPokemon($userPokedex, null, $form);
                 $this->entityManager->persist($entry);
             }
         }

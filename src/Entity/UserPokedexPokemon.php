@@ -36,6 +36,7 @@ class UserPokedexPokemon
     private ?UserPokedex $pokedex = null;
 
     #[ORM\ManyToOne(inversedBy: 'usersPokemon')]
+    #[ORM\OrderBy(["regionalNumber" => "ASC", "pokemon" => "ASC"])]
     private ?PokedexPokemon $pokemon = null;
 
     #[ORM\ManyToOne(inversedBy: 'userPokemon')]

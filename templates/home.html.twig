@@ -5,13 +5,14 @@
 {% block body %}
     {% if app.user %}
         <div class="row">
-            <h1 class="col-10">
+            <h1 class="col-8">
                 Pokédex de {{ app.user.nickname }}
                 {% if completion != 0 %}
                     ({{ completion }}% de complétion)
                 {% endif %}
             </h1>
-            <p class="col-2"><a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex</a></p>
+            <p class="col-2"><a href="{{ path('app_pokedex_create') }}" class="btn btn-success">Créer un nouveau pokédex existant</a></p>
+            <p class="col-2"><a href="{{ path('app_pokedex_create_perso') }}" class="btn btn-success">Créer un nouveau pokédex personnalisé</a></p>
         </div>
 
         {% for pokedex in user_pokedex %}
