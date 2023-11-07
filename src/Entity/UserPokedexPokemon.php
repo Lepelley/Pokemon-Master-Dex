@@ -40,6 +40,7 @@ class UserPokedexPokemon
     private ?PokedexPokemon $pokemon = null;
 
     #[ORM\ManyToOne(inversedBy: 'userPokemon')]
+    #[ORM\OrderBy(["pokemon" => "ASC"])]
     private ?PokemonForm $form = null;
 
     #[ORM\Column]
