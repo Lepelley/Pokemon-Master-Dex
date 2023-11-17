@@ -1,3 +1,5 @@
+Fusionner PokedexPokemon et UserPokedexPokemon
+
 # Sprites manquants
 - Evoli femelle / femelle shiny : sprite mâle appliqué pour l'instant
 - Charmilly / Charmilly shiny (formes) : https://www.deviantart.com/leparagon/art/Gen-8-Pokemon-sprites-800622106
