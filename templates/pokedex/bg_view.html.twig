@@ -30,7 +30,7 @@
                 <img src="{{ asset('images/pokemon/0.png') }}" alt="Inconnu" style="width: 32px">
             {% else %}
                 {% set isShiny = pokedex.shiny ? 'shiny/' %}
-                {% set isFemale = pokemon.form and not pokemon.isMale ? 'female/' %}
+                {% set isFemale = pokemon.form and pokemon.form.isGenderDifference and not pokemon.isMale ? 'female/' %}
                 {% set image = pokemon.form ? pokemon.form.image and not pokemon.isMale ? pokemon.form.image : pokemon.form.pokemon.nationalNumber : pokemon.pokemon.pokemon.nationalNumber %}
                 <img src="{{ asset('images/pokemon/' ~ isShiny ~ isFemale ~ image  ~ '.png') }}"  style="width: 32px;transform: scale(1.8)">
             {% endif %}

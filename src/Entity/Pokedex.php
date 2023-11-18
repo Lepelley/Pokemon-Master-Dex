@@ -31,9 +31,6 @@ class Pokedex
     #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: PokedexPokemon::class, orphanRemoval: true)]
     private Collection $pokemon;
 
-    #[ORM\OneToMany(mappedBy: 'pokedex', targetEntity: UserPokedex::class, orphanRemoval: true)]
-    private Collection $allUsersPokedex;
-
     #[ORM\Column]
     private ?bool $isShinyUnavailable = null;
 
@@ -105,36 +102,6 @@ class Pokedex
             // set the owning side to null (unless already changed)
             if ($pokemon->getPokedex() === $this) {
                 $pokemon->setPokedex(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserPokedex>
-     */
-    public function getAllUsersPokedex(): Collection
-    {
-        return $this->allUsersPokedex;
-    }
-
-    public function addAllUsersPokedex(UserPokedex $allUsersPokedex): self
-    {
-        if (!$this->allUsersPokedex->contains($allUsersPokedex)) {
-            $this->allUsersPokedex->add($allUsersPokedex);
-            $allUsersPokedex->setPokedex($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAllUsersPokedex(UserPokedex $allUsersPokedex): self
-    {
-        if ($this->allUsersPokedex->removeElement($allUsersPokedex)) {
-            // set the owning side to null (unless already changed)
-            if ($allUsersPokedex->getPokedex() === $this) {
-                $allUsersPokedex->setPokedex(null);
             }
         }
 
