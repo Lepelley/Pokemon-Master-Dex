@@ -43,6 +43,8 @@ class UserPokedex
 
     private ?int $pokemonCaughtPerCent = null;
 
+    private ?Pokedex $pokedex = null;
+
     #[ORM\ManyToOne(inversedBy: 'userPokedex')]
     private ?Game $baseGame = null;
 
@@ -204,5 +206,14 @@ class UserPokedex
         $this->baseGame = $baseGame;
 
         return $this;
+    }
+
+    public function getPokedex(): ?Pokedex
+    {
+        return $this->pokedex;
+    }
+    public function setPokedex(?Pokedex $pokedex): void
+    {
+        $this->pokedex = $pokedex;
     }
 }
