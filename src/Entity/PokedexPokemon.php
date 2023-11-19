@@ -28,6 +28,10 @@ class PokedexPokemon
     #[ORM\OrderBy(["nationalNumber" => "ASC"])]
     private ?Pokemon $pokemon = null;
 
+    #[ORM\ManyToOne(inversedBy: 'pokemon')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Pokedex $pokedex = null;
+
     #[ORM\OneToMany(mappedBy: 'pokemon', targetEntity: UserPokedexPokemon::class, orphanRemoval: true)]
     private Collection $usersPokemon;
 
@@ -62,6 +66,16 @@ class PokedexPokemon
     {
         $this->regionalNumber = $regionalNumber;
 
+        return $this;
+    }
+
+    public function getPokedex(): ?Pokedex
+    {
+        return $this->pokedex;
+    }
+    public function setPokedex(?Pokedex $pokedex): self
+    {
+        $this->pokedex = $pokedex;
         return $this;
     }
 

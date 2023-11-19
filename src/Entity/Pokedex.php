@@ -44,7 +44,6 @@ class Pokedex
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
-        $this->allUsersPokedex = new ArrayCollection();
         $this->games = new ArrayCollection();
         $this->pokemonForms = new ArrayCollection();
     }
