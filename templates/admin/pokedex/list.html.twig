@@ -34,7 +34,7 @@
         {% for dex in pokedex %}
             <tr>
                 <td>{{ dex.name }}</td>
-{#                <td>{{ dex.pokemon is iterable ? dex.pokemon.count : 0 }}</td>#}
+                <td>{{ dex.pokemon.count }}</td>
                 <td></td>
                 <td>{{ dex.games.count }}</td>
                 <td>{{ dex.isOnline ? '<i class="bi bi-check-circle"></i>' : "&#10060;" }}</td>
