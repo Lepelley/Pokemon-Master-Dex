@@ -27,8 +27,6 @@ class NationalDexFixtures extends Fixture
             ['National 5G', 649],
             ['National 6G', 721],
             ['National 7G', 808],
-            ['National 8G', 898],
-            ['National 9G', 1017],
         ];
 
         $time = new \DateTimeImmutable();

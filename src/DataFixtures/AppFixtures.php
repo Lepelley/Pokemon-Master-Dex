@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
             ['National 6G', false, ['X', 'Y']],
             ['National 7G', false, ['Soleil', 'Lune', "Ultra-Soleil", "Ultra-Lune"]],
             ['HOME', false, ['HOME']],
-            ['Kanto', true, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille']],
+            ['Kanto 1G/3G', true, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille']],
             ['Johto', true, ['Or', 'Argent', 'Cristal']],
             ['Hoenn', true, ['Rubis', 'Saphir', "Émeraude"]],
             ['Rhodes de Colosseum', true, ['Colosseum']],
@@ -109,11 +109,12 @@ class AppFixtures extends Fixture
             ['Alola de Ultra-Soleil & Ultra-Lune', true, ["Ultra-Soleil", "Ultra-Lune"]],
             ["Kanto de Let's Go Pikachu & Let's Go Évoli", true, ["Let's Go Pikachu", "Let's Go Évoli"]],
             ['Galar', true, ["Epée", "Bouclier"]],
-            ['Galar Zone Isolarmure', true, ["Épée", "Bouclier"]],
-            ['Galar Zone Couronneige', true, ["Épée", "Bouclier"]],
+            ['Isolarmure Regional Dex (EB DLC 1)', true, ["Épée", "Bouclier"]],
+            ['Couronneige Regional Dex (EB DLC 2)', true, ["Épée", "Bouclier"]],
             ['Sinnoh de Diamant Étincelant & Perle Scintillante', true, ["Diamant Étincelant", "Perle Scintillante"]],
-            ['Hisui de Légendes : Arceus', true, ["Légendes : Arceus"]],
-            ['Paldea', true, ["Écarlate", "Violet"]],
+
+            ['Paldea Regional Dex', true, ["Écarlate", "Violet"]],
+            ['Hisui de Légendes : Arceus Regional Dex', true, ["Légendes : Arceus"]],
         ];
 
         foreach ($array as $dex) {
