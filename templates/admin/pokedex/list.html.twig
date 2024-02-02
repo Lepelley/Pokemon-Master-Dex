@@ -23,6 +23,7 @@
         <tr>
             <th>Nom du Pokédex</th>
             <th>Nombre de Pokémon</th>
+            <th>Nombre de formes</th>
             <th>Nombre de jeux</th>
             <th>En ligne</th>
             <th>Créé le</th>
@@ -35,7 +36,7 @@
             <tr>
                 <td>{{ dex.name }}</td>
                 <td>{{ dex.pokemon.count }}</td>
-                <td></td>
+                <td>{{ dex.pokemonForms.count }}</td>
                 <td>{{ dex.games.count }}</td>
                 <td>{{ dex.isOnline ? '<i class="bi bi-check-circle"></i>' : "&#10060;" }}</td>
                 <td>{{ dex.createdAt | date('d/m/Y H:i') }}</td>

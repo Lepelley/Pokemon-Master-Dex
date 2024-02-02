@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Entity\Pokedex;
 use App\Entity\PokedexPokemon;
 use App\Entity\Pokemon;
+use App\Entity\PokemonForm;
 use App\Entity\User;
 use App\Repository\GameRepository;
 use App\Repository\PokedexRepository;
@@ -54,6 +55,7 @@ class AppFixtures extends Fixture
             'Y' => new \DateTimeImmutable('2013-10-12'),
             'Rubis Oméga' => new \DateTimeImmutable('2014-11-21'),
             'Saphir Alpha' => new \DateTimeImmutable('2014-11-21'),
+            'Pokémon Go' => new \DateTimeImmutable('2016-07-06'),
             'Soleil' => new \DateTimeImmutable('2016-11-18'),
             'Lune' => new \DateTimeImmutable('2016-11-18'),
             'Ultra-Soleil' => new \DateTimeImmutable('2017-11-17'),
@@ -83,15 +85,25 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $array = [
+            ['HOME National Dex', false, ['HOME']],
+            ['HOME Master Dex', false, ['HOME']],
             ['National 1G', false, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille', "Let's Go Pikachu", "Let's Go Évoli"]],
+            ['National 1G Master Dex', false, ['Rouge Feu', 'Vert Feuille']],
             ['National 2G', false, ['Or', 'Argent', 'Cristal', "HeartGold", "SoulSilver"]],
-            ['National 3G', false, ['Rubis', 'Saphir', "Émeraude", "Rubis Oméga", "Saphir Alpha"]],
-            ['National 4G', false, ['Diamant', 'Perle', "Platine", "Diamant Étincelant", "Perle Scintillante"]],
+            ['National 2G Master Dex', false, ['Or', 'Argent', 'Cristal', "HeartGold", "SoulSilver"]],
+            ['National 3G', false, ["Rouge Feu", "Vert Feuille", 'Rubis', 'Saphir', "Émeraude", "Rubis Oméga", "Saphir Alpha"]],
+            ['National 3G Master Dex', false, ["Rouge Feu", "Vert Feuille", 'Rubis', 'Saphir', "Émeraude", "Rubis Oméga", "Saphir Alpha"]],
+            ['National 4G', false, ['Diamant', 'Perle', "Platine", "HeartGold", "SoulSilver", "Diamant Étincelant", "Perle Scintillante"]],
+            ['National 4G Master Dex', false, ['Diamant', 'Perle', "Platine", "HeartGold", "SoulSilver", "Diamant Étincelant", "Perle Scintillante"]],
             ['National 5G', false, ['Noir', 'Blanc', "Noir 2", "Blanc 2"]],
-            ['National 6G', false, ['X', 'Y']],
+            ['National 5G Master Dex', false, ['Noir', 'Blanc', "Noir 2", "Blanc 2"]],
+            ['National 6G', false, ['X', 'Y', "Rubis Oméga", "Saphir Alpha"]],
+            ['National 6G Master Dex', false, ['X', 'Y', "Rubis Oméga", "Saphir Alpha"]],
             ['National 7G', false, ['Soleil', 'Lune', "Ultra-Soleil", "Ultra-Lune"]],
-            ['HOME', false, ['HOME']],
-            ['Kanto 1G/3G', true, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille']],
+            ['National 7G Master Dex', false, ['Soleil', 'Lune', "Ultra-Soleil", "Ultra-Lune"]],
+            ['National 8G', false, ['Épée', 'Bouclier']],
+            ['National 9G', false, ['Écarlate', 'Violet']],
+            ['Kanto', true, ['Vert', 'Rouge', 'Bleu', 'Jaune', 'Rouge Feu', 'Vert Feuille']],
             ['Johto', true, ['Or', 'Argent', 'Cristal']],
             ['Hoenn', true, ['Rubis', 'Saphir', "Émeraude"]],
             ['Rhodes de Colosseum', true, ['Colosseum']],
@@ -108,13 +120,22 @@ class AppFixtures extends Fixture
             ['Alola', true, ['Soleil', 'Lune']],
             ['Alola de Ultra-Soleil & Ultra-Lune', true, ["Ultra-Soleil", "Ultra-Lune"]],
             ["Kanto de Let's Go Pikachu & Let's Go Évoli", true, ["Let's Go Pikachu", "Let's Go Évoli"]],
+            ["Kanto de Let's Go Pikachu & Let's Go Évoli Master Dex", true, ["Let's Go Pikachu", "Let's Go Évoli"]],
             ['Galar', true, ["Epée", "Bouclier"]],
-            ['Isolarmure Regional Dex (EB DLC 1)', true, ["Épée", "Bouclier"]],
-            ['Couronneige Regional Dex (EB DLC 2)', true, ["Épée", "Bouclier"]],
+            ['Galar Master Dex', true, ["Epée", "Bouclier"]],
+            ['Isolarmure (EB DLC 1)', true, ["Épée", "Bouclier"]],
+            ['Isolarmure Master Dex (EB DLC 1)', true, ["Épée", "Bouclier"]],
+            ['Couronneige (EB DLC 2)', true, ["Épée", "Bouclier"]],
+            ['Couronneige Master Dex (EB DLC 2)', true, ["Épée", "Bouclier"]],
             ['Sinnoh de Diamant Étincelant & Perle Scintillante', true, ["Diamant Étincelant", "Perle Scintillante"]],
-
-            ['Paldea Regional Dex', true, ["Écarlate", "Violet"]],
-            ['Hisui de Légendes : Arceus Regional Dex', true, ["Légendes : Arceus"]],
+            ['Hisui de Légendes : Arceus', true, ["Légendes : Arceus"]],
+            ['Hisui de Légendes : Arceus Master Dex', true, ["Légendes : Arceus"]],
+            ['Paldea', true, ["Écarlate", "Violet"]],
+            ['Paldea Master Dex', true, ["Écarlate", "Violet"]],
+            ['Septentria (EV DLC 1)', true, ["Écarlate", "Violet"]],
+            ['Septentria Master Dex (EV DLC 1)', true, ["Écarlate", "Violet"]],
+            ['Institut Myrtille (EV DLC 2)', true, ["Écarlate", "Violet"]],
+            ['Institut Myrtille Master Dex (EV DLC 2)', true, ["Écarlate", "Violet"]],
         ];
 
         foreach ($array as $dex) {
@@ -144,7 +165,7 @@ class AppFixtures extends Fixture
         $manager->persist($trainer);
 
         $poke = [];
-        $fileHandle = fopen("var/csv/pokemon.csv", "r");
+        $fileHandle = fopen("var/csv/pokemon/pokemon.csv", "r");
         while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
             $pokemon = (new Pokemon())
                 ->setName($row[1])
@@ -158,7 +179,24 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        $pokedex = $this->pokedexRepository->findOneBy(['name' => 'HOME']);
+        $pokeForms = [];
+        $fileHandle = fopen("var/csv/pokemon/forms.csv", "r");
+        while (($row = fgetcsv($fileHandle, 0, ",")) !== false) {
+            $pokemon = (new PokemonForm())
+                ->setPokemon($poke[$row[0] - 1])
+                ->setIsGenderDifference($row[1] == 1)
+                ->setName(trim($row[2]))
+                ->setImage(trim($row[3]))
+                ->setIsOnline(true)
+                ->setCreatedAt($time)
+                ->setUpdatedAt($time)
+            ;
+            $manager->persist($pokemon);
+            $pokeForms[] = $pokemon;
+        }
+        $manager->flush();
+
+        $pokedex = $this->pokedexRepository->findOneBy(['name' => 'HOME National Dex']);
         foreach ($poke as $p) {
             $dexMon = (new PokedexPokemon())
                 ->setPokemon($p)

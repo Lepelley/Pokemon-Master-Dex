@@ -20,13 +20,23 @@ class NationalDexFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $data = [
-            ['National 1G', 151],
-            ['National 2G', 251],
-            ['National 3G', 386],
+            ['National 1G', 152],
+            ['National 1G Master Dex', 152],
+            ['National 2G', 252],
+            ['National 2G Master Dex', 252],
+            ['National 3G', 387],
+            ['National 3G Master Dex', 387],
             ['National 4G', 494],
-            ['National 5G', 649],
-            ['National 6G', 721],
+            ['National 4G Master Dex', 494],
+            ['National 5G', 650],
+            ['National 5G Master Dex', 650],
+            ['National 6G', 722],
+            ['National 6G Master Dex', 722],
             ['National 7G', 808],
+            ['National 7G Master Dex', 808],
+            ['National 8G', 906],
+            ['National 9G', 1026],
+            ['HOME Master Dex', 1026],
         ];
 
         $time = new \DateTimeImmutable();

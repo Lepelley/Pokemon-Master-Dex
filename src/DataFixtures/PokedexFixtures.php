@@ -23,13 +23,23 @@ class PokedexFixtures extends Fixture
 
         $data = [
             // nom du dex, nom du csv, colonne du regional dex, forme #001 ?, colonne du nom du poké
-            ['Paldea Regional Dex', 'paldea.csv', 0, true, 2],
-            ['Hisui de Légendes : Arceus Régional Dex', 'hisui.csv', 0, false, 2],
+            ['Institut Myrtille (EV DLC 2)', 'blueberry.csv', 0, false, 2],
+            ['Institut Myrtille Master Dex (EV DLC 2)', 'blueberry.csv', 0, false, 2],
+            ['Septentria (EV DLC 1)', 'kitakami.csv', 0, false, 2],
+            ['Septentria Master Dex (EV DLC 1)', 'kitakami.csv', 0, false, 2],
+            ['Paldea', 'paldea.csv', 0, true, 2],
+            ['Paldea Master Dex', 'paldea.csv', 0, true, 2],
+            ['Hisui de Légendes : Arceus', 'hisui.csv', 0, false, 2],
+            ['Hisui de Légendes : Arceus Master Dex', 'hisui.csv', 0, false, 2],
             ['Sinnoh de Diamant Étincelant & Perle Scintillante', 'sinnoh.csv', 0, true, 2],
-            ['Couronneige Regional Dex (EB DLC 2)', 'couronneige.csv', 0, true, 2],
-            ['Isolarmure Regional Dex (EB DLC 1)', 'isolarmure.csv', 0, true, 2],
+            ['Couronneige (EB DLC 2)', 'couronneige.csv', 0, true, 2],
+            ['Couronneige Master Dex (EB DLC 2)', 'couronneige.csv', 0, true, 2],
+            ['Isolarmure (EB DLC 1)', 'isolarmure.csv', 0, true, 2],
+            ['Isolarmure Master Dex (EB DLC 1)', 'isolarmure.csv', 0, true, 2],
             ['Galar', 'galar.csv', 0, true, 2],
+            ['Galar Master Dex', 'galar.csv', 0, true, 2],
             ["Kanto de Let's Go Pikachu & Let's Go Évoli", 'lgpe.csv', 0, true, 2],
+            ["Kanto de Let's Go Pikachu & Let's Go Évoli Master Dex", 'lgpe.csv', 0, true, 2],
             ["Alola de Ultra-Soleil & Ultra-Lune", 'usum.csv', 0, true, 2],
             ["Alola", 'sunmoon.csv', 0, false, 2],
             ["Hoenn de Rubis Oméga & Saphir Alpha", 'rosa.csv', 0, false, 3],
@@ -45,7 +55,7 @@ class PokedexFixtures extends Fixture
             ['Rhodes de Colosseum', 'colosseum.csv', 10, false, 1],
             ["Hoenn", 'emeraude.csv', 0, false, 1],
             ['Johto', 'gsc.csv', 0, false, 2],
-            ['Kanto 1G/3G', 'kanto.csv', 0, false, 1],
+            ['Kanto', 'kanto.csv', 0, false, 1],
         ];
 
         foreach ($data as $r) {
